@@ -1,0 +1,243 @@
+# CRMT Tracker - Cursor Rules
+
+## 🏗️ Project Architecture
+
+This is a **modular Laravel application** following Clean Architecture principles with strict separation of concerns.
+
+### Module Structure
+
+Every module MUST follow this structure:
+
+```
+app/Modules/{ModuleName}/
+├── Application/
+│   ├── Actions/          # Use cases (business logic)
+│   ├── DTOs/             # Data Transfer Objects
+│   ├── Services/         # Domain services
+│   └── Interfaces/       # Repository interfaces
+├── Infrastructure/
+│   ├── Models/           # Eloquent models
+│   ├── Repositories/     # Repository implementations
+│   ├── Http/
+│   │   ├── Controllers/  # API controllers
+│   │   ├── Requests/     # Form requests (validation)
+│   │   └── Resources/    # API resources
+│   ├── Providers/        # Service providers
+│   └── Routes/           # API routes
+├── Database/
+│   ├── Migrations/       # Database migrations
+│   └── Factories/        # Model factories
+├── Exceptions/           # Module-specific exceptions (optional)
+├── Observers/            # Model observers (optional)
+├── Policies/             # Authorization policies (optional)
+├── Events/               # Domain events (optional)
+├── Listeners/            # Event listeners (optional)
+└── Enums/                # Enum classes (optional)
+```
+
+### Architecture Rules
+
+1. **NEVER create modules manually** - Always use commands or YAML
+2. **Application Layer** (Actions, DTOs, Services) - Contains business logic, NO framework dependencies
+3. **Infrastructure Layer** (Models, Repositories, Controllers) - Framework-specific implementations
+4. **Dependency Direction**: Infrastructure → Application (Infrastructure depends on Application interfaces)
+5. **Controllers** should ONLY call Actions, never access Models directly
+6. **Repositories** implement interfaces defined in Application/Interfaces
+7. **Actions** contain business logic and use Repository interfaces (not implementations)
+
+## 📦 Module Creation
+
+### Rule: ALWAYS create modules using commands or YAML
+
+**NEVER manually create module files or directories.**
+
+### Method 1: Interactive Command
+
+```bash
+php artisan make:module
+```
+
+This will start an interactive wizard that guides you through:
+- Module name
+- Model fields (name:string, price:float, etc.)
+- Relationships (belongsTo, hasMany, belongsToMany, morphTo, etc.)
+- Additional features (exceptions, observers, policies, events, enums, notifications)
+
+### Method 2: Non-Interactive Command
+
+```bash
+php artisan make:module Product \
+  --model="name:string,price:float,stock:int,is_active:bool,category_id:int" \
+  --relations="category:belongsTo:Category,reviews:hasMany:Review" \
+  --exceptions \
+  --observers \
+  --policies \
+  --events \
+  --enum
+```
+
+### Method 3: YAML File (for multiple modules)
+
+1. Add module definition to `modules.yaml`:
+
+```yaml
+modules:
+  Product:
+    fields:
+      name: string
+      price: float
+      is_active: boolean
+      status: enum
+      metadata: json
+      published_at: datetime
+    relations:
+      belongsToMany: [Category, Tag]
+      user: belongsTo:User
+      comments: morphMany:Comment:commentable
+    observers: true
+    policies: true
+    exceptions: true
+    events: true
+    enum: true
+```
+
+2. Run:
+
+```bash
+php artisan modules:build-from-yaml
+```
+
+### Module Creation Checklist
+
+After creating a module:
+- ✅ Verify module structure matches architecture
+- ✅ Check that service provider is registered in `bootstrap/app.php`
+- ✅ Verify routes are loaded
+- ✅ Run tests to ensure module works
+- ✅ Run Pint for code formatting
+- ✅ Run PHPStan for static analysis
+
+## 🧪 Quality Assurance Workflow
+
+### After ANY code changes, ALWAYS run:
+
+1. **Tests** (MUST pass):
+   ```bash
+   php artisan test
+   ```
+
+2. **Laravel Pint** (format code):
+   ```bash
+   vendor/bin/pint
+   ```
+
+3. **PHPStan** (static analysis):
+   ```bash
+   vendor/bin/phpstan analyse --memory-limit=2G
+   ```
+
+### Commit Rules
+
+- ✅ **ONLY commit** if ALL checks pass:
+  - All tests pass (276+ tests)
+  - Pint formatting is correct
+  - PHPStan analysis passes (level 8)
+
+- ❌ **NEVER commit** if:
+  - Any test fails
+  - Pint reports formatting issues
+  - PHPStan reports errors
+
+### Automated Checks
+
+GitHub Actions workflows are configured:
+- `.github/workflows/tests.yml` - Runs on PRs, blocks merge if tests fail
+- `.github/workflows/ci.yml` - Runs after merge, executes Pint, tests, and PHPStan
+
+## 🚀 Deployment
+
+### Server Information
+
+- **Host**: 46.224.13.32
+- **User**: root
+- **SSH Key**: `~/.ssh/id_ed25519_work`
+- **Project Path**: `/var/www/crmtTracker` (verify actual path)
+
+### Deployment Command
+
+When user requests deployment, use:
+
+```bash
+ssh -i ~/.ssh/id_ed25519_work root@46.224.13.32 "cd /var/www/crmtTracker && [deployment commands]"
+```
+
+### Deployment Steps (when requested)
+
+1. Pull latest changes:
+   ```bash
+   ssh -i ~/.ssh/id_ed25519_work root@46.224.13.32 "cd /var/www/crmtTracker && git pull"
+   ```
+
+2. Install dependencies:
+   ```bash
+   ssh -i ~/.ssh/id_ed25519_work root@46.224.13.32 "cd /var/www/crmtTracker && composer install --no-dev --optimize-autoloader"
+   ```
+
+3. Run migrations:
+   ```bash
+   ssh -i ~/.ssh/id_ed25519_work root@46.224.13.32 "cd /var/www/crmtTracker && php artisan migrate --force"
+   ```
+
+4. Clear caches:
+   ```bash
+   ssh -i ~/.ssh/id_ed25519_work root@46.224.13.32 "cd /var/www/crmtTracker && php artisan config:clear && php artisan cache:clear && php artisan route:clear && php artisan view:clear"
+   ```
+
+5. Optimize:
+   ```bash
+   ssh -i ~/.ssh/id_ed25519_work root@46.224.13.32 "cd /var/www/crmtTracker && php artisan config:cache && php artisan route:cache && php artisan view:cache"
+   ```
+
+## 📋 Code Standards
+
+### PHP
+
+- Always use `declare(strict_types=1);` at the top of every PHP file
+- Always use explicit return types for methods
+- Always use type hints for method parameters
+- Use PHP 8 constructor property promotion
+- Use curly braces for all control structures
+
+### Laravel
+
+- Use Form Request classes for validation (never inline validation)
+- Use Eloquent relationships instead of raw queries
+- Use eager loading to prevent N+1 queries
+- Use API Resources for API responses
+- Use Actions for business logic (not controllers)
+- Use Repository pattern for data access
+
+### Testing
+
+- Every feature MUST have tests
+- Use factories for test data
+- Feature tests preferred over unit tests
+- Run tests after every change
+
+## 🔒 Git Workflow
+
+- Create feature branches for new work
+- Run tests, Pint, and PHPStan before committing
+- Only commit when all checks pass
+- Use descriptive commit messages
+- Push to remote and create PR for review
+
+## ⚠️ Important Reminders
+
+1. **NEVER manually create module files** - Always use `make:module` or `modules:build-from-yaml`
+2. **ALWAYS run tests** after code changes
+3. **ALWAYS run Pint** before committing
+4. **ALWAYS run PHPStan** before committing
+5. **NEVER commit** if any check fails
+6. **Verify architecture** matches module structure before committing
+7. **Deploy only when explicitly requested** by user
