@@ -107,6 +107,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME:-clientapp11.crmtracker.com}
     volumes:
       - ./:/var/www
       - ./.docker/nginx/prod:/etc/nginx/conf.d
