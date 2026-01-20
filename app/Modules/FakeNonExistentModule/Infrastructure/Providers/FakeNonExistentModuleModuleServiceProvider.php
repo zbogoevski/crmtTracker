@@ -47,7 +47,7 @@ class FakeNonExistentModuleModuleServiceProvider extends ServiceProvider
      */
     protected function isModuleEnabled(): bool
     {
-        return (bool) config("modules.specific.FakeNonExistentModule.enabled", true);
+        return (bool) config('modules.specific.FakeNonExistentModule.enabled', true);
     }
 
     /**
@@ -73,7 +73,7 @@ class FakeNonExistentModuleModuleServiceProvider extends ServiceProvider
      */
     protected function registerPolicies(): void
     {
-        $policyClass = "App\\Modules\\FakeNonExistentModule\\Infrastructure\\Policies\\FakeNonExistentModulePolicy";
+        $policyClass = 'App\\Modules\\FakeNonExistentModule\\Infrastructure\\Policies\\FakeNonExistentModulePolicy';
 
         if (class_exists($policyClass) && class_exists(FakeNonExistentModule::class)) {
             Gate::policy(FakeNonExistentModule::class, $policyClass);
@@ -86,7 +86,7 @@ class FakeNonExistentModuleModuleServiceProvider extends ServiceProvider
      */
     protected function registerObservers(): void
     {
-        $observerClass = "App\\Modules\\FakeNonExistentModule\\Infrastructure\\Observers\\FakeNonExistentModuleObserver";
+        $observerClass = 'App\\Modules\\FakeNonExistentModule\\Infrastructure\\Observers\\FakeNonExistentModuleObserver';
 
         if (class_exists($observerClass) && class_exists(FakeNonExistentModule::class)) {
             FakeNonExistentModule::observe($observerClass);
@@ -99,7 +99,7 @@ class FakeNonExistentModuleModuleServiceProvider extends ServiceProvider
      */
     protected function registerEvents(): void
     {
-        $basePath = app_path("Modules/FakeNonExistentModule");
+        $basePath = app_path('Modules/FakeNonExistentModule');
         $eventsPath = "{$basePath}/Application/Events";
         $listenersPath = "{$basePath}/Application/Listeners";
 
@@ -126,4 +126,3 @@ class FakeNonExistentModuleModuleServiceProvider extends ServiceProvider
         }
     }
 }
-

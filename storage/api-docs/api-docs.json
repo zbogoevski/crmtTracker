@@ -655,14 +655,14 @@
                 ]
             }
         },
-        "/api/v1/nonexistentstubmodules": {
+        "/api/v1/fakenonexistentmodules": {
             "get": {
                 "tags": [
-                    "NonExistentStubModules"
+                    "FakeNonExistentModules"
                 ],
-                "summary": "List nonexistentstubmodules",
-                "description": "Get paginated list of nonexistentstubmodules",
-                "operationId": "02cc3241642f663eff28c09d1f547c82",
+                "summary": "List fakenonexistentmodules",
+                "description": "Get paginated list of fakenonexistentmodules",
+                "operationId": "38f0314d12d278f9261ade209d629178",
                 "parameters": [
                     {
                         "name": "page",
@@ -685,7 +685,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "NonExistentStubModules retrieved successfully",
+                        "description": "FakeNonExistentModules retrieved successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -696,7 +696,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "NonExistentStubModules retrieved successfully"
+                                            "example": "FakeNonExistentModules retrieved successfully"
                                         },
                                         "data": {
                                             "type": "array",
@@ -735,11 +735,11 @@
             },
             "post": {
                 "tags": [
-                    "NonExistentStubModules"
+                    "FakeNonExistentModules"
                 ],
-                "summary": "Create nonexistentstubmodule",
-                "description": "Create a new nonexistentstubmodule",
-                "operationId": "db72e7b6b576a86ba2dd5d4096e90709",
+                "summary": "Create fakenonexistentmodule",
+                "description": "Create a new fakenonexistentmodule",
+                "operationId": "db864a641c57e977ca6a5296bbfcb894",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -751,7 +751,7 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "example": "Example nonexistentstubmodule"
+                                        "example": "Example fakenonexistentmodule"
                                     }
                                 },
                                 "type": "object"
@@ -761,7 +761,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "NonExistentStubModule created successfully",
+                        "description": "FakeNonExistentModule created successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -772,7 +772,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "NonExistentStubModule created successfully"
+                                            "example": "FakeNonExistentModule created successfully"
                                         },
                                         "data": {
                                             "type": "object"
@@ -811,29 +811,29 @@
                 ]
             }
         },
-        "/api/v1/nonexistentstubmodules/{id}": {
+        "/api/v1/fakenonexistentmodules/{id}": {
             "get": {
                 "tags": [
-                    "NonExistentStubModules"
+                    "FakeNonExistentModules"
                 ],
-                "summary": "Get nonexistentstubmodule by ID",
-                "description": "Get specific nonexistentstubmodule information by ID",
-                "operationId": "02cb689bf9bfe1b7a6e67f48a32a76b8",
+                "summary": "Get fakenonexistentmodule by ID",
+                "description": "Get specific fakenonexistentmodule information by ID",
+                "operationId": "dabe0a65ba3364c08a3be8cf213fa3da",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "NonExistentStubModule ID",
+                        "description": "FakeNonExistentModule ID (supports integer IDs, ULIDs, and UUIDs)",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "example": "1"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "NonExistentStubModule retrieved successfully",
+                        "description": "FakeNonExistentModule retrieved successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -844,7 +844,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "NonExistentStubModule retrieved successfully"
+                                            "example": "FakeNonExistentModule retrieved successfully"
                                         },
                                         "data": {
                                             "type": "object"
@@ -856,7 +856,7 @@
                         }
                     },
                     "404": {
-                        "description": "NonExistentStubModule not found",
+                        "description": "FakeNonExistentModule not found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -884,20 +884,20 @@
             },
             "put": {
                 "tags": [
-                    "NonExistentStubModules"
+                    "FakeNonExistentModules"
                 ],
-                "summary": "Update nonexistentstubmodule",
-                "description": "Update nonexistentstubmodule information",
-                "operationId": "5b95b03b23460f64ee5965a4b9938911",
+                "summary": "Update fakenonexistentmodule",
+                "description": "Update fakenonexistentmodule information",
+                "operationId": "56547bad7c8dd1068cf4655b4c704f76",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "NonExistentStubModule ID",
+                        "description": "FakeNonExistentModule ID (supports integer IDs, ULIDs, and UUIDs)",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "example": "1"
                         }
                     }
                 ],
@@ -909,7 +909,7 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "example": "Updated nonexistentstubmodule"
+                                        "example": "Updated fakenonexistentmodule"
                                     }
                                 },
                                 "type": "object"
@@ -919,7 +919,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "NonExistentStubModule updated successfully",
+                        "description": "FakeNonExistentModule updated successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -930,7 +930,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "NonExistentStubModule updated successfully"
+                                            "example": "FakeNonExistentModule updated successfully"
                                         },
                                         "data": {
                                             "type": "object"
@@ -942,7 +942,7 @@
                         }
                     },
                     "404": {
-                        "description": "NonExistentStubModule not found",
+                        "description": "FakeNonExistentModule not found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -980,26 +980,26 @@
             },
             "delete": {
                 "tags": [
-                    "NonExistentStubModules"
+                    "FakeNonExistentModules"
                 ],
-                "summary": "Delete nonexistentstubmodule",
-                "description": "Delete a nonexistentstubmodule",
-                "operationId": "e9d543230030a5968325194a51078556",
+                "summary": "Delete fakenonexistentmodule",
+                "description": "Delete a fakenonexistentmodule",
+                "operationId": "919cfcd4d9da294c173a548bdfc57ed2",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "NonExistentStubModule ID",
+                        "description": "FakeNonExistentModule ID (supports integer IDs, ULIDs, and UUIDs)",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "example": "1"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "NonExistentStubModule deleted successfully",
+                        "description": "FakeNonExistentModule deleted successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1010,7 +1010,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "NonExistentStubModule deleted successfully"
+                                            "example": "FakeNonExistentModule deleted successfully"
                                         }
                                     },
                                     "type": "object"
@@ -1019,7 +1019,7 @@
                         }
                     },
                     "404": {
-                        "description": "NonExistentStubModule not found",
+                        "description": "FakeNonExistentModule not found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2206,8 +2206,8 @@
             "description": "Permission management endpoints"
         },
         {
-            "name": "NonExistentStubModules",
-            "description": "NonExistentStubModules"
+            "name": "FakeNonExistentModules",
+            "description": "FakeNonExistentModules"
         }
     ]
 }

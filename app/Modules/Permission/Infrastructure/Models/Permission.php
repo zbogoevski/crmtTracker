@@ -19,7 +19,6 @@ use Override;
  * @property string $guard_name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  */
 class Permission extends Model
 {
