@@ -23,15 +23,6 @@ class StubFileGeneratorTest extends TestCase
     #[Override]
     protected function tearDown(): void
     {
-        // Cleanup any generated migrations for FakeNonExistentModule
-        $migrationsPath = app_path('Modules/FakeNonExistentModule/Database/Migrations');
-        if ($this->files->exists($migrationsPath)) {
-            $migrations = $this->files->glob($migrationsPath.'/*create_test_modules_table.php');
-            foreach ($migrations as $migration) {
-                $this->files->delete($migration);
-            }
-        }
-
         parent::tearDown();
     }
 
@@ -104,15 +95,20 @@ class StubFileGeneratorTest extends TestCase
         ];
 
         // Should not throw when stub doesn't exist
-        $generator->generate('FakeNonExistentModule', $fields, $options);
+        $generator->generate('NonExistentTestModule', $fields, $options);
 
         // Cleanup generated migration
-        $migrationsPath = app_path('Modules/FakeNonExistentModule/Database/Migrations');
+        $migrationsPath = app_path('Modules/NonExistentTestModule/Database/Migrations');
         if ($this->files->exists($migrationsPath)) {
             $migrations = $this->files->glob($migrationsPath.'/*create_test_modules_table.php');
             foreach ($migrations as $migration) {
                 $this->files->delete($migration);
             }
+        }
+
+        // Cleanup module directory
+        if (is_dir(app_path('Modules/NonExistentTestModule'))) {
+            $this->files->deleteDirectory(app_path('Modules/NonExistentTestModule'));
         }
 
         $this->expectNotToPerformAssertions();

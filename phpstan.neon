@@ -24,7 +24,3 @@ parameters:
         - '#Call to method execute\(\) on an unknown class#'
         - '#Call to static method fromRequest\(\) on an unknown class#'
         - '#Parameter.*of method.*NonExistentStubModule.*#'
-        # Ignore errors in FakeNonExistentModule (test module)
-        - '#FakeNonExistentModule.*#'
-        - '#.*FakeNonExistentModule.*class\.notFound#'
-        - '#.*FakeNonExistentModule.*property\.notFound#'
