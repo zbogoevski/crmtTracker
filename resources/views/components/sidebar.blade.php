@@ -199,7 +199,7 @@
             <span class="nav-text text-sm font-medium">A.4 Pipeline Manager</span>
         </a>
         @if(auth()->user()->hasRole('admin'))
-        <a href="#" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
+        <a href="{{ route('users.index') }}" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
             <i class="fa-solid fa-users-gear w-5 text-center"></i>
             <span class="nav-text text-sm font-medium">A.5 User Management</span>
         </a>
@@ -225,9 +225,12 @@
                 {{ strtoupper(substr(auth()->user()->name, 0, 2)) }}
             </div>
             <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-white truncate">{{ auth()->user()->name }}</p>
+                <p class="text-sm font-medium text-white truncate">{{ auth()->user()->email }}</p>
                 <p class="text-xs text-gray-500 truncate">{{ auth()->user()->roles()->first()?->name ?? 'viewer' }}</p>
             </div>
+            <a href="{{ route('profile.show') }}" class="text-gray-400 hover:text-blue-400 transition-colors" title="Profile">
+                <i class="fa-solid fa-user"></i>
+            </a>
             <form method="POST" action="{{ route('logout') }}" class="inline">
                 @csrf
                 <button type="submit" class="text-gray-400 hover:text-red-400 transition-colors" title="Logout">

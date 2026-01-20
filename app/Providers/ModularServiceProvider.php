@@ -93,6 +93,8 @@ class ModularServiceProvider extends ServiceProvider
 
     /**
      * Get modules list by scanning directory.
+     *
+     * @return array<int, string>
      */
     protected function getModulesList(string $basePath): array
     {
