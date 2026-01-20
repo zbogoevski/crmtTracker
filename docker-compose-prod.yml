@@ -10,22 +10,8 @@ services:
       - ./.docker/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - ./.docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
       - ./.docker/php/php-fpm-prod.conf:/usr/local/etc/php-fpm.d/www.conf
-    environment:
-      - APP_ENV=production
-      - APP_DEBUG=false
-      - DB_CONNECTION=pgsql
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_DATABASE=${DB_DATABASE:-crmtracker}
-      - DB_USERNAME=${DB_USERNAME:-crmtracker}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
-      - REDIS_DB=0
-      - SESSION_DRIVER=redis
-      - CACHE_DRIVER=redis
-      - QUEUE_CONNECTION=redis
+    env_file:
+      - .env
     depends_on:
       postgres:
         condition: service_healthy
