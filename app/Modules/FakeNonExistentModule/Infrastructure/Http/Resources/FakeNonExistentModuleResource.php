@@ -23,7 +23,7 @@ class FakeNonExistentModuleResource extends JsonResource
     {
         return [
             'id' => $this->id,
-                        'name' => $this->name,
+            'name' => $this->name,
             'created_at' => $this->created_at instanceof \Carbon\Carbon ? $this->created_at->toISOString() : ($this->created_at ? (string) $this->created_at : null),
             'updated_at' => $this->updated_at instanceof \Carbon\Carbon ? $this->updated_at->toISOString() : ($this->updated_at ? (string) $this->updated_at : null),
         ];

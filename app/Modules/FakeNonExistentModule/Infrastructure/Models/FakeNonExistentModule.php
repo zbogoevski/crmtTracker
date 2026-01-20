@@ -16,12 +16,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
-
 /**
  * FakeNonExistentModule Model.
- * 
+ *
  * Represents a fakenonexistentmodule in the database.
- * 
+ *
  * @property int $id
  * @property string $name
  * @property Carbon|null $created_at
@@ -44,7 +43,7 @@ class FakeNonExistentModule extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        
+
     ];
 
     /**
@@ -53,13 +52,11 @@ class FakeNonExistentModule extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return FakeNonExistentModuleFactory
      */
     public static function newFactory(): FakeNonExistentModuleFactory
     {
@@ -75,5 +72,5 @@ class FakeNonExistentModule extends Model
     }
 
     // RELATIONSHIPS
-    
+
 }
