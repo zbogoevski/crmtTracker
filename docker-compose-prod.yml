@@ -3,7 +3,6 @@ services:
     build:
       context: .docker
       dockerfile: Dockerfile
-    container_name: app_module_prod
     restart: always
     working_dir: /var/www/
     volumes:
