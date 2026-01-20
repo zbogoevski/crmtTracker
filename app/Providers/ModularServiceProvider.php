@@ -41,19 +41,36 @@ class ModularServiceProvider extends ServiceProvider
         }
 
         // Cache modules list (short TTL in dev, forever in prod)
+        // Check if cache is available before using it
         $cacheKey = 'modular.modules.list';
         $ttl = app()->environment('production') ? null : now()->addMinutes(5);
 
-        $modules = Cache::remember($cacheKey, $ttl, function () use ($basePath) {
-            $dirs = array_filter(scandir($basePath) ?: [], fn ($d) => $d !== '.'
-                && $d !== '..'
-                && is_dir("{$basePath}/{$d}")
-                && ! str_starts_with($d, 'NonExistent')
-                && ! str_starts_with($d, 'Test')
-                && ! str_contains($d, 'Test'));
+        try {
+            // Check if cache driver is configured and available
+            $cacheDriver = config('cache.default');
+            if ($cacheDriver === 'database') {
+                // For database cache, check if cache table exists
+                try {
+                    \Illuminate\Support\Facades\DB::table('cache')->limit(1)->get();
+                } catch (\Exception) {
+                    // Cache table doesn't exist, skip caching
+                    $cacheDriver = null;
+                }
+            }
 
-            return array_values($dirs);
-        });
+            if ($cacheDriver !== null) {
+                $modules = Cache::remember($cacheKey, $ttl, function () use ($basePath) {
+                    return $this->getModulesList($basePath);
+                });
+            } else {
+                // Cache not available, get modules directly
+                $modules = $this->getModulesList($basePath);
+            }
+        } catch (Throwable $e) {
+            // If cache fails, fallback to direct directory scan
+            Log::warning("Cache unavailable, using direct directory scan: {$e->getMessage()}");
+            $modules = $this->getModulesList($basePath);
+        }
 
         // Register global factory resolver (once for all modules)
         $this->registerFactoriesResolver($basePath, $nsBase);
@@ -72,6 +89,21 @@ class ModularServiceProvider extends ServiceProvider
 
     #[Override]
     public function register(): void {}
+
+    /**
+     * Get modules list by scanning directory.
+     */
+    protected function getModulesList(string $basePath): array
+    {
+        $dirs = array_filter(scandir($basePath) ?: [], fn ($d) => $d !== '.'
+            && $d !== '..'
+            && is_dir("{$basePath}/{$d}")
+            && ! str_starts_with($d, 'NonExistent')
+            && ! str_starts_with($d, 'Test')
+            && ! str_contains($d, 'Test'));
+
+        return array_values($dirs);
+    }
 
     /**
      * Include module helpers if present.
