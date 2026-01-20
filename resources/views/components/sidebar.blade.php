@@ -1,6 +1,6 @@
 <aside id="crmt-nav-sidebar" class="w-96 bg-[#0F172A] text-white flex flex-col flex-shrink-0 transition-all duration-300 fixed left-0 top-0 h-full z-10 shadow-xl">
     <div class="h-16 flex items-center justify-between px-6 border-b border-gray-800">
-        <a href="{{ route('home') }}" class="flex items-center gap-3 text-xl font-bold tracking-tight hover:opacity-80 transition-opacity">
+        <a href="#" class="flex items-center gap-3 text-xl font-bold tracking-tight hover:opacity-80 transition-opacity">
             <div class="w-9 h-9 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
                 <i class="fa-solid fa-crosshairs text-white text-sm"></i>
             </div>
@@ -23,7 +23,7 @@
         @endphp
 
         <!-- CRMTracker Scores Link -->
-        <a href="{{ route('home') }}" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors mb-2">
+        <a href="#" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors mb-2">
             <i class="fa-solid fa-star w-5 text-center text-yellow-400"></i>
             <span class="text-sm font-medium">CRMTracker® Scores</span>
         </a>
@@ -44,11 +44,11 @@
                 <i class="fa-solid fa-chevron-down text-xs transition-transform" style="{{ $m1_active ? 'transform: rotate(180deg);' : '' }}"></i>
             </a>
             <div class="nav-submenu bg-slate-900" style="max-height: {{ $m1_active ? '500px' : '0' }}; overflow: hidden; transition: max-height 0.3s ease-out;">
-                <a href="{{ route('reports.1.1') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.1.1') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">1.1 Performance Dashboard</a>
-                <a href="{{ route('reports.1.2') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.1.2') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">1.2 Journey Mapping</a>
-                <a href="{{ route('reports.1.3') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.1.3') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">1.3 Customer Lifecycle</a>
-                <a href="{{ route('reports.1.4') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.1.4') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">1.4 Product Matrix</a>
-                <a href="{{ route('reports.1.5') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.1.5') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">1.5 Timing Intelligence</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">1.1 Performance Dashboard</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">1.2 Journey Mapping</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">1.3 Customer Lifecycle</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">1.4 Product Matrix</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">1.5 Timing Intelligence</a>
             </div>
         </div>
 
@@ -62,8 +62,8 @@
                 <i class="fa-solid fa-chevron-down text-xs transition-transform" style="{{ $m2_active ? 'transform: rotate(180deg);' : '' }}"></i>
             </a>
             <div class="nav-submenu bg-slate-900" style="max-height: {{ $m2_active ? '500px' : '0' }}; overflow: hidden; transition: max-height 0.3s ease-out;">
-                <a href="{{ route('reports.2.1') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.2.1') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">2.1 Content Quality Hub</a>
-                <a href="{{ route('reports.2.2') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.2.2') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">2.2 Offers & Risk</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">2.1 Content Quality Hub</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">2.2 Offers & Risk</a>
             </div>
         </div>
 
@@ -77,9 +77,9 @@
                 <i class="fa-solid fa-chevron-down text-xs transition-transform" style="{{ $m3_active ? 'transform: rotate(180deg);' : '' }}"></i>
             </a>
             <div class="nav-submenu bg-slate-900" style="max-height: {{ $m3_active ? '500px' : '0' }}; overflow: hidden; transition: max-height 0.3s ease-out;">
-                <a href="{{ route('reports.3.1') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.3.1') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">3.1 Compliance Scorecard</a>
-                <a href="{{ route('reports.3.2') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.3.2') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">3.2 Compliance Alignment</a>
-                <a href="{{ route('reports.3.3') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.3.3') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">3.3 Audit Preparedness</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">3.1 Compliance Scorecard</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">3.2 Compliance Alignment</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">3.3 Audit Preparedness</a>
             </div>
         </div>
 
@@ -93,9 +93,9 @@
                 <i class="fa-solid fa-chevron-down text-xs transition-transform" style="{{ $m4_active ? 'transform: rotate(180deg);' : '' }}"></i>
             </a>
             <div class="nav-submenu bg-slate-900" style="max-height: {{ $m4_active ? '500px' : '0' }}; overflow: hidden; transition: max-height 0.3s ease-out;">
-                <a href="{{ route('reports.4.1') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.4.1') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">4.1 License & Entity Verification</a>
-                <a href="{{ route('reports.4.2') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.4.2') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">4.2 Compliance Cost Analysis</a>
-                <a href="{{ route('reports.4.3') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.4.3') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">4.3 Transparency Audit</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">4.1 License & Entity Verification</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">4.2 Compliance Cost Analysis</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">4.3 Transparency Audit</a>
             </div>
         </div>
 
@@ -109,9 +109,9 @@
                 <i class="fa-solid fa-chevron-down text-xs transition-transform" style="{{ $m5_active ? 'transform: rotate(180deg);' : '' }}"></i>
             </a>
             <div class="nav-submenu bg-slate-900" style="max-height: {{ $m5_active ? '500px' : '0' }}; overflow: hidden; transition: max-height 0.3s ease-out;">
-                <a href="{{ route('reports.5.1') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.5.1') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">5.1 Valuation Uplift</a>
-                <a href="{{ route('reports.5.2') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.5.2') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">5.2 Compliance Exposure</a>
-                <a href="{{ route('reports.5.3') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.5.3') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">5.3 Migration Readiness</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">5.1 Valuation Uplift</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">5.2 Compliance Exposure</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">5.3 Migration Readiness</a>
             </div>
         </div>
 
@@ -125,9 +125,9 @@
                 <i class="fa-solid fa-chevron-down text-xs transition-transform" style="{{ $m6_active ? 'transform: rotate(180deg);' : '' }}"></i>
             </a>
             <div class="nav-submenu bg-slate-900" style="max-height: {{ $m6_active ? '500px' : '0' }}; overflow: hidden; transition: max-height 0.3s ease-out;">
-                <a href="{{ route('reports.6.1') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.6.1') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">6.1 Benchmarking</a>
-                <a href="{{ route('reports.6.2') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.6.2') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">6.2 Strategy Matrix</a>
-                <a href="{{ route('reports.6.3') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.6.3') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">6.3 SOW Generator</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">6.1 Benchmarking</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">6.2 Strategy Matrix</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">6.3 SOW Generator</a>
             </div>
         </div>
 
@@ -141,7 +141,7 @@
                 <i class="fa-solid fa-chevron-down text-xs transition-transform" style="{{ $m7_active ? 'transform: rotate(180deg);' : '' }}"></i>
             </a>
             <div class="nav-submenu bg-slate-900" style="max-height: {{ $m7_active ? '500px' : '0' }}; overflow: hidden; transition: max-height 0.3s ease-out;">
-                <a href="{{ route('reports.7.1') }}" class="block pl-12 pr-4 py-2.5 text-sm transition-colors {{ request()->routeIs('reports.7.1') ? 'text-white bg-slate-800 font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}">7.1 Brand Profile</a>
+                <a href="#" class="block pl-12 pr-4 py-2.5 text-sm transition-colors text-slate-400 hover:text-white hover:bg-slate-800">7.1 Brand Profile</a>
             </div>
         </div>
 
