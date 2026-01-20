@@ -11,27 +11,62 @@ services:
       - ./.docker/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - ./.docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
       - ./.docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+      - ./.docker/php/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf
+    environment:
+      - DB_CONNECTION=pgsql
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=crmtracker
+      - DB_USERNAME=crmtracker
+      - DB_PASSWORD=crmtracker_secret
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=null
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
     networks:
       - laravelapp
 
-  db:
-    image: mariadb:latest
-    container_name: mysql_module
+  postgres:
+    image: timescale/timescaledb:latest-pg16
+    container_name: postgres_module
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: homestead
-      MYSQL_USER: homestead
-      MYSQL_PASSWORD: secret
-      MYSQL_ROOT_PASSWORD: secret
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
+      POSTGRES_DB: crmtracker
+      POSTGRES_USER: crmtracker
+      POSTGRES_PASSWORD: crmtracker_secret
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
     ports:
-      - "3301:3306"
+      - "5432:5432"
     volumes:
-      - dbdata:/var/lib/mysql
-      - ./.docker/mysql/my.cnf:/etc/mysql/my.cnf
+      - postgresdata:/var/lib/postgresql/data
+      - ./.docker/postgres/init-timescale.sql:/docker-entrypoint-initdb.d/01-init-timescale.sql
+      - ./.docker/postgres/postgresql.conf:/etc/postgresql/postgresql.conf
     networks:
       - laravelapp
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U crmtracker -d crmtracker" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis_module
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - laravelapp
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   nginx:
     image: nginx:latest
@@ -41,12 +76,15 @@ services:
       - "8080:80"
     volumes:
       - ./:/var/www
-      - ./.docker/nginx:/etc/nginx/conf.d
+      - ./.docker/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app
     networks:
       - laravelapp
 
 volumes:
-  dbdata:
+  postgresdata:
+    driver: local
 
 networks:
   laravelapp:

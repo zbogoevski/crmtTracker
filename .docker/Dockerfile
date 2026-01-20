@@ -8,9 +8,12 @@ RUN apk add --no-cache \
     libxml2-dev oniguruma-dev libzip-dev \
     autoconf g++ make
 
+# Install PostgreSQL dependencies
+RUN apk add --no-cache postgresql-dev
+
 # Install PHP extensions
 RUN docker-php-ext-configure gd --with-jpeg --with-freetype \
-    && docker-php-ext-install -j$(nproc) gd pdo_mysql mbstring exif pcntl bcmath zip intl \
+    && docker-php-ext-install -j$(nproc) gd pdo_pgsql pgsql mbstring exif pcntl bcmath zip intl \
     && pecl install redis \
     && docker-php-ext-enable redis
 
