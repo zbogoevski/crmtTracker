@@ -36,5 +36,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
+# Create necessary directories and set permissions
+RUN mkdir -p /var/www/vendor /var/www/storage /var/www/bootstrap/cache \
+    && chown -R www-data:www-data /var/www \
+    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
 # Set user
 USER www-data
