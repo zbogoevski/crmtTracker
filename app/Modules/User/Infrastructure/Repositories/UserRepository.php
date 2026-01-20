@@ -44,11 +44,11 @@ class UserRepository extends EloquentRepository implements UserRepositoryInterfa
      */
     public function paginateWithRoles(int $perPage = 15): LengthAwarePaginator
     {
-        /** @var LengthAwarePaginator<int, User> $result */
         $result = $this->query()
             ->with(['roles', 'permissions'])
             ->paginate($perPage);
 
+        /** @var LengthAwarePaginator<int, User> $result */
         return $result;
     }
 
@@ -61,6 +61,9 @@ class UserRepository extends EloquentRepository implements UserRepositoryInterfa
     {
         $cacheKey = "users_paginated_{$perPage}";
 
-        return \Illuminate\Support\Facades\Cache::remember($cacheKey, $ttl, fn () => $this->paginate($perPage));
+        $result = \Illuminate\Support\Facades\Cache::remember($cacheKey, $ttl, fn () => $this->paginate($perPage));
+
+        /** @var LengthAwarePaginator<int, User> $result */
+        return $result;
     }
 }

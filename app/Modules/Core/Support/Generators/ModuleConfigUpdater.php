@@ -23,6 +23,9 @@ class ModuleConfigUpdater
         }
 
         $content = file_get_contents($this->configPath);
+        if ($content === false) {
+            return;
+        }
 
         // Check if module already exists in config
         if ($this->moduleExists($content, $moduleName)) {
@@ -46,12 +49,16 @@ class ModuleConfigUpdater
         }
 
         $content = file_get_contents($this->configPath);
+        if ($content === false) {
+            return;
+        }
 
         // Remove the module entry
         $pattern = "/\s+'{$moduleName}' => \[\s+.*?\s+\],\n/s";
-        $content = preg_replace($pattern, '', $content);
-
-        file_put_contents($this->configPath, $content);
+        $result = preg_replace($pattern, '', $content);
+        if ($result !== null) {
+            file_put_contents($this->configPath, $result);
+        }
     }
 
     /**
