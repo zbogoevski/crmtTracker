@@ -23,7 +23,8 @@ FROM php:8.4-fpm-alpine
 # Install runtime dependencies
 RUN apk add --no-cache \
     git curl bash unzip \
-    libpng libjpeg freetype libzip icu libxml2 oniguruma
+    libpng libjpeg freetype libzip icu libxml2 oniguruma \
+    postgresql-libs
 
 # Copy PHP extensions from builder
 COPY --from=builder /usr/local/lib/php/extensions /usr/local/lib/php/extensions
