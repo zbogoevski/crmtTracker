@@ -1,0 +1,157 @@
+services:
+  app:
+    build:
+      context: .docker
+      dockerfile: Dockerfile
+    container_name: app_module_prod
+    restart: always
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+      - ./.docker/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./.docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+      - ./.docker/php/php-fpm-prod.conf:/usr/local/etc/php-fpm.d/www.conf
+    environment:
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - DB_CONNECTION=pgsql
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=${DB_DATABASE:-crmtracker}
+      - DB_USERNAME=${DB_USERNAME:-crmtracker}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_DB=0
+      - SESSION_DRIVER=redis
+      - CACHE_DRIVER=redis
+      - QUEUE_CONNECTION=redis
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - laravelapp
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+
+  postgres:
+    image: timescale/timescaledb:latest-pg16
+    container_name: postgres_module_prod
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-crmtracker}
+      POSTGRES_USER: ${DB_USERNAME:-crmtracker}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+      - ./.docker/postgres/init-timescale.sql:/docker-entrypoint-initdb.d/01-init-timescale.sql
+      - ./.docker/postgres/postgresql-prod.conf:/etc/postgresql/postgresql.conf
+    networks:
+      - laravelapp
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USERNAME:-crmtracker} -d ${DB_DATABASE:-crmtracker}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 4G
+        reservations:
+          cpus: '2'
+          memory: 2G
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis_module_prod
+    restart: always
+    command: redis-server --requirepass ${REDIS_PASSWORD} --maxmemory 1gb --maxmemory-policy allkeys-lru --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    networks:
+      - laravelapp
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--no-auth-warning", "-a", "${REDIS_PASSWORD}", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_module_prod
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./.docker/nginx/prod:/etc/nginx/conf.d
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - dhparam:/etc/nginx/dhparam
+    depends_on:
+      - app
+      - certbot
+    networks:
+      - laravelapp
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: certbot_prod
+    restart: unless-stopped
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - ./:/var/www
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    networks:
+      - laravelapp
+
+volumes:
+  postgresdata:
+    driver: local
+  redisdata:
+    driver: local
+  certbot-etc:
+    driver: local
+  certbot-var:
+    driver: local
+  dhparam:
+    driver: local
+
+networks:
+  laravelapp:
+    driver: bridge

@@ -24,25 +24,26 @@ LOG_CHANNEL=stack
 LOG_DEPRECATIONS_CHANNEL=null
 LOG_LEVEL=debug
 
-DB_CONNECTION=mysql
-DB_HOST=db
-DB_PORT=3306
-DB_DATABASE=homestead
-DB_USERNAME=homestead
-DB_PASSWORD=secret
+DB_CONNECTION=pgsql
+DB_HOST=postgres
+DB_PORT=5432
+DB_DATABASE=crmtracker
+DB_USERNAME=crmtracker
+DB_PASSWORD=crmtracker_secret
 
-BROADCAST_DRIVER=log
-CACHE_STORE=file
+BROADCAST_DRIVER=redis
+CACHE_STORE=redis
 FILESYSTEM_DISK=local
-QUEUE_CONNECTION=sync
-SESSION_DRIVER=file
+QUEUE_CONNECTION=redis
+SESSION_DRIVER=redis
 SESSION_LIFETIME=120
 
 MEMCACHED_HOST=127.0.0.1
 
-REDIS_HOST=127.0.0.1
+REDIS_HOST=redis
 REDIS_PASSWORD=null
 REDIS_PORT=6379
+REDIS_DB=0
 
 MAIL_MAILER=smtp
 MAIL_HOST=sandbox.smtp.mailtrap.io
@@ -77,9 +78,25 @@ echo "✅ .env.docker file created"
 echo "🚀 Starting Docker containers..."
 docker-compose up -d
 
-# Wait for database to be ready
-echo "⏳ Waiting for database to be ready..."
-sleep 10
+# Wait for services to be ready
+echo "⏳ Waiting for PostgreSQL and Redis to be ready..."
+sleep 15
+
+# Check PostgreSQL health
+echo "🔍 Checking PostgreSQL health..."
+until docker-compose exec -T postgres pg_isready -U crmtracker -d crmtracker > /dev/null 2>&1; do
+    echo "   Waiting for PostgreSQL..."
+    sleep 2
+done
+echo "✅ PostgreSQL is ready"
+
+# Check Redis health
+echo "🔍 Checking Redis health..."
+until docker-compose exec -T redis redis-cli ping > /dev/null 2>&1; do
+    echo "   Waiting for Redis..."
+    sleep 2
+done
+echo "✅ Redis is ready"
 
 # Copy .env.docker to .env for Docker environment
 echo "📋 Copying Docker environment configuration..."
@@ -87,43 +104,44 @@ cp .env.docker .env
 
 # Install dependencies inside container
 echo "📦 Installing dependencies..."
-docker-compose exec app composer install
+docker-compose exec -T app composer install
 
 # Generate application key if needed
 echo "🔑 Generating application key..."
-docker-compose exec app php artisan key:generate
+docker-compose exec -T app php artisan key:generate
 
 # Run migrations
 echo "🗄️ Running migrations..."
-docker-compose exec app php artisan migrate:fresh
+docker-compose exec -T app php artisan migrate:fresh
 
 # Publish Spatie Permission migrations
 echo "🔐 Publishing Spatie Permission migrations..."
-docker-compose exec app php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
+docker-compose exec -T app php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
 
 # Run migrations again to include permission tables
 echo "🗄️ Running migrations with permission tables..."
-docker-compose exec app php artisan migrate
+docker-compose exec -T app php artisan migrate
 
 # Run seeders
 echo "🌱 Running seeders..."
-docker-compose exec app php artisan db:seed
+docker-compose exec -T app php artisan db:seed
 
 # Generate Swagger documentation
 echo "📚 Generating Swagger documentation..."
-docker-compose exec app php artisan l5-swagger:generate
+docker-compose exec -T app php artisan l5-swagger:generate
 
 # Set proper permissions
 echo "🔧 Setting proper permissions..."
-docker-compose exec app chmod -R 775 storage bootstrap/cache
+docker-compose exec -T app chmod -R 775 storage bootstrap/cache
 
 echo ""
 echo "🎉 Docker setup completed successfully!"
 echo ""
 echo "📋 Available services:"
-echo "   🌐 Web: http://localhost"
-echo "   🗄️ Database: localhost:3301 (homestead/secret)"
-echo "   📚 API Docs: http://localhost/api/documentation"
+echo "   🌐 Web: http://localhost:8080"
+echo "   🗄️ PostgreSQL: localhost:5432 (crmtracker/crmtracker_secret)"
+echo "   🔴 Redis: localhost:6379"
+echo "   📚 API Docs: http://localhost:8080/api/documentation"
 echo ""
 echo "🔧 Useful commands:"
 echo "   docker-compose exec app php artisan migrate:fresh --seed"
