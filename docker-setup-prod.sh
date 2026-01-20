@@ -106,6 +106,14 @@ sleep 15
 echo "📋 Copying production environment configuration..."
 cp .env.production .env
 
+# Start app container for running commands
+echo "🚀 Starting app container..."
+docker compose -f docker-compose-prod.yml up -d app
+
+# Wait for app container to be ready
+echo "⏳ Waiting for app container to be ready..."
+sleep 10
+
 # Install dependencies
 echo "📦 Installing dependencies..."
 docker compose -f docker-compose-prod.yml exec -T app composer install --no-dev --optimize-autoloader
