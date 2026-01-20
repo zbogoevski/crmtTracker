@@ -96,7 +96,7 @@ fi
 
 # Start Docker containers (without SSL first)
 echo "🐳 Starting Docker containers..."
-docker-compose -f docker-compose-prod.yml up -d postgres redis
+docker compose -f docker-compose-prod.yml up -d postgres redis
 
 # Wait for services to be ready
 echo "⏳ Waiting for services to be ready..."
@@ -108,42 +108,42 @@ cp .env.production .env
 
 # Install dependencies
 echo "📦 Installing dependencies..."
-docker-compose -f docker-compose-prod.yml exec -T app composer install --no-dev --optimize-autoloader
+docker compose -f docker-compose-prod.yml exec -T app composer install --no-dev --optimize-autoloader
 
 # Generate application key if needed
 echo "🔑 Generating application key..."
-docker-compose -f docker-compose-prod.yml exec -T app php artisan key:generate --force
+docker compose -f docker-compose-prod.yml exec -T app php artisan key:generate --force
 
 # Run migrations
 echo "🗄️ Running migrations..."
-docker-compose -f docker-compose-prod.yml exec -T app php artisan migrate --force
+docker compose -f docker-compose-prod.yml exec -T app php artisan migrate --force
 
 # Publish Spatie Permission migrations
 echo "🔐 Publishing Spatie Permission migrations..."
-docker-compose -f docker-compose-prod.yml exec -T app php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations" --force
+docker compose -f docker-compose-prod.yml exec -T app php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations" --force
 
 # Run migrations again
 echo "🗄️ Running migrations with permission tables..."
-docker-compose -f docker-compose-prod.yml exec -T app php artisan migrate --force
+docker compose -f docker-compose-prod.yml exec -T app php artisan migrate --force
 
 # Optimize for production
 echo "⚡ Optimizing for production..."
-docker-compose -f docker-compose-prod.yml exec -T app php artisan config:cache
-docker-compose -f docker-compose-prod.yml exec -T app php artisan route:cache
-docker-compose -f docker-compose-prod.yml exec -T app php artisan view:cache
+docker compose -f docker-compose-prod.yml exec -T app php artisan config:cache
+docker compose -f docker-compose-prod.yml exec -T app php artisan route:cache
+docker compose -f docker-compose-prod.yml exec -T app php artisan view:cache
 
 # Set proper permissions
 echo "🔧 Setting proper permissions..."
-docker-compose -f docker-compose-prod.yml exec -T app chmod -R 775 storage bootstrap/cache
-docker-compose -f docker-compose-prod.yml exec -T app chown -R www-data:www-data storage bootstrap/cache
+docker compose -f docker-compose-prod.yml exec -T app chmod -R 775 storage bootstrap/cache
+docker compose -f docker-compose-prod.yml exec -T app chown -R www-data:www-data storage bootstrap/cache
 
 # Start Nginx and App
 echo "🌐 Starting Nginx and App containers..."
-docker-compose -f docker-compose-prod.yml up -d nginx app
+docker compose -f docker-compose-prod.yml up -d nginx app
 
 # Request SSL certificate
 echo "🔒 Requesting SSL certificate from Let's Encrypt..."
-docker-compose -f docker-compose-prod.yml run --rm certbot certonly \
+docker compose -f docker-compose-prod.yml run --rm certbot certonly \
     --webroot \
     --webroot-path=/var/www/certbot \
     --email ${SSL_EMAIL:-admin@${DOMAIN_NAME}} \
@@ -154,11 +154,11 @@ docker-compose -f docker-compose-prod.yml run --rm certbot certonly \
 
 # Restart Nginx with SSL
 echo "🔄 Restarting Nginx with SSL configuration..."
-docker-compose -f docker-compose-prod.yml restart nginx
+docker compose -f docker-compose-prod.yml restart nginx
 
 # Generate Swagger documentation
 echo "📚 Generating Swagger documentation..."
-docker-compose -f docker-compose-prod.yml exec -T app php artisan l5-swagger:generate
+docker compose -f docker-compose-prod.yml exec -T app php artisan l5-swagger:generate
 
 echo ""
 echo "🎉 Production setup completed successfully!"
@@ -170,11 +170,11 @@ echo "   📚 API Docs: https://${DOMAIN_NAME}/api/documentation"
 echo "   🔴 Redis: localhost:6379"
 echo ""
 echo "🔧 Useful commands:"
-echo "   docker-compose -f docker-compose-prod.yml logs -f"
-echo "   docker-compose -f docker-compose-prod.yml exec app php artisan migrate"
-echo "   docker-compose -f docker-compose-prod.yml exec app php artisan queue:work"
+echo "   docker compose -f docker-compose-prod.yml logs -f"
+echo "   docker compose -f docker-compose-prod.yml exec app php artisan migrate"
+echo "   docker compose -f docker-compose-prod.yml exec app php artisan queue:work"
 echo ""
-echo "🛑 To stop: docker-compose -f docker-compose-prod.yml down"
-echo "🔄 To restart: docker-compose -f docker-compose-prod.yml restart"
+echo "🛑 To stop: docker compose -f docker-compose-prod.yml down"
+echo "🔄 To restart: docker compose -f docker-compose-prod.yml restart"
 echo ""
 echo "📝 SSL Certificate will auto-renew via Certbot container"
