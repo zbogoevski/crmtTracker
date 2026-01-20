@@ -3,43 +3,9 @@
 @section('content')
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ asset('js/vendor/chart.js') }}"></script>
 @endpush
 
-@push('styles')
-<style>
-body {
-            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-        }
-
-        .tab-btn {
-            transition: all 0.2s;
-        }
-
-        .tab-btn.active {
-            border-bottom: 3px solid #10B981;
-            color: #10B981;
-            font-weight: 600;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .competitor-card {
-            transition: all 0.2s;
-        }
-
-        .competitor-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-</style>
-@endpush
 
 @section('content')
 <div class="space-y-6">

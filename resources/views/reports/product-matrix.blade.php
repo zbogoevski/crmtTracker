@@ -3,41 +3,6 @@
 @section('content')
 <div class="space-y-6">
 
-@push('styles')
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8FAFC;
-        }
-
-        .feature-yes {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .feature-no {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .feature-partial {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .matrix-cell {
-            min-width: 120px;
-            text-align: center;
-        }
-
-        .compact-mode .matrix-cell {
-            min-width: 80px;
-            font-size: 12px;
-        }
-</style>
-@endpush
 
 @section('content')
 <main class="flex-1 ml-20 p-8 max-w-[1800px] mx-auto overflow-x-hidden">

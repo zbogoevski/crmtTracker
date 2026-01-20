@@ -2,67 +2,6 @@
 
 @section('title', 'Report 3.3: Audit Preparedness | CRMTracker')
 
-@push('styles')
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8FAFC;
-            color: #334155;
-        }
-
-        .sticky-col {
-            position: sticky;
-            left: 0;
-            z-index: 10;
-            background: linear-gradient(to right, #f8fafc 90%, transparent);
-        }
-
-        .total-row .sticky-col {
-            background: linear-gradient(to right, #7c3aed 0%, #7c3aed 90%, transparent);
-        }
-
-        .stub-tooltip:hover::after {
-            opacity: 1;
-        }
-
-        .score-good {
-            color: #22c55e;
-        }
-
-        .score-mid {
-            color: #f59e0b;
-        }
-
-        .score-bad {
-            color: #ef4444;
-        }
-
-        .section-stub {
-            background: repeating-linear-gradient(45deg,
-                    #f8fafc,
-                    #f8fafc 10px,
-                    #f1f5f9 10px,
-                    #f1f5f9 20px);
-        }
-
-        .risk-low {
-            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
-            color: #166534;
-        }
-
-        .risk-medium {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            color: #92400e;
-        }
-
-        .risk-high {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            color: #991b1b;
-        }
-</style>
-@endpush
 
 @section('content')
 <div class="space-y-6">

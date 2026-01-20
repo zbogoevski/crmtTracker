@@ -3,30 +3,6 @@
 
 @section('title', 'Report 5.3: Migration Readiness | CRMTracker')
 
-@push('styles')
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8FAFC;
-            color: #334155;
-        }
-
-        .gauge-needle {
-            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: bottom center;
-            transform: rotate(-90deg);
-        }
-
-        .sticky-col {
-            position: sticky;
-            left: 0;
-            z-index: 10;
-            background: linear-gradient(to right, #f8fafc 90%, transparent);
-        }
-</style>
-@endpush
 
 @section('content')
 <main class="flex-1 ml-20 p-8 max-w-[1600px] mx-auto overflow-x-hidden">

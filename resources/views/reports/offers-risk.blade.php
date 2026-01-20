@@ -4,58 +4,9 @@
 @section('title', 'CRMTracker - Offers & Risk')
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ asset('js/vendor/chart.js') }}"></script>
 @endpush
 
-@push('styles')
-<style>
-body {
-            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-        }
-
-        .tab-btn {
-            transition: all 0.2s;
-        }
-
-        .tab-btn.active {
-            border-bottom: 3px solid #F59E0B;
-            color: #F59E0B;
-            font-weight: 600;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .competitor-card {
-            transition: all 0.2s;
-        }
-
-        .competitor-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .risk-high {
-            background: #FEE2E2;
-            color: #991B1B;
-        }
-
-        .risk-medium {
-            background: #FEF3C7;
-            color: #92400E;
-        }
-
-        .risk-low {
-            background: #D1FAE5;
-            color: #065F46;
-        }
-</style>
-@endpush
 
 @section('content')
 <div class="space-y-6">

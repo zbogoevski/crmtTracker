@@ -4,93 +4,9 @@
 <div class="space-y-6">
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ asset('js/vendor/chart.js') }}"></script>
 @endpush
 
-@push('styles')
-<style>
-body {
-            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-        }
-
-        .tab-btn {
-            transition: all 0.2s;
-        }
-
-        .tab-btn.active {
-            border-bottom: 3px solid #4F46E5;
-            color: #4F46E5;
-            font-weight: 600;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .heatmap-cell {
-            min-width: 32px;
-            min-height: 28px;
-        }
-
-        .competitor-card {
-            transition: all 0.2s;
-        }
-
-        .competitor-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .competitor-card.focus-selected {
-            outline: 3px solid #3B82F6;
-            outline-offset: 2px;
-            box-shadow: 0 0 0 3px #3B82F6;
-        }
-
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 2px;
-        }
-
-        .calendar-cell {
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            border-radius: 4px;
-        }
-
-        .calendar-cell.has-activity-1 {
-            background: #dcfce7;
-        }
-
-        .calendar-cell.has-activity-2 {
-            background: #86efac;
-        }
-
-        .calendar-cell.has-activity-3 {
-            background: #22c55e;
-            color: white;
-        }
-
-        /* Compact calendar for 3-column layout */
-        .calendar-compact .calendar-cell {
-            font-size: 8px;
-            min-width: 12px;
-            min-height: 12px;
-        }
-
-        .calendar-compact {
-            gap: 1px;
-        }
-</style>
-@endpush
 
 <main class="flex-1 ml-20 p-8 max-w-[1800px] mx-auto">
 <header class="flex justify-between items-center mb-6">

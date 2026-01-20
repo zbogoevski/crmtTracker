@@ -1,0 +1,28 @@
+{
+  "name": "crmttracker",
+  "version": "1.0.0",
+  "description": "Modular Laravel Starter Kit",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "autoprefixer": "^10.4.23",
+    "laravel-vite-plugin": "^2.0.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18",
+    "vite": "^7.3.1",
+    "chart.js": "^4.4.0"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "axios": "^1.13.2",
+    "@fortawesome/fontawesome-free": "^6.0.0"
+  }
+}

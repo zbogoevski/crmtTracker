@@ -3,44 +3,6 @@
 
 @section('title', 'CRMTracker - Brand Profile')
 
-@push('styles')
-<style>
-body {
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
-
-        .wizard-step {
-            transition: all 0.3s ease;
-        }
-
-        .wizard-step.active {
-            border-color: #6366f1;
-            background: #f0f0ff;
-        }
-
-        .wizard-step.completed {
-            border-color: #10b981;
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-        }
-
-        .wizard-step.completed p {
-            color: white !important;
-        }
-
-        .wizard-step.completed .step-number {
-            background: rgba(255, 255, 255, 0.3) !important;
-        }
-
-        .report-section {
-            border-left: 3px solid #6366f1;
-        }
-
-        .report-section.collapsed .section-content {
-            display: none;
-        }
-</style>
-@endpush
 
 @section('content')
 <div class="flex-1 ml-20">

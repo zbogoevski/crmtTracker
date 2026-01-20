@@ -3,28 +3,6 @@
 
 @section('title', 'CRMTracker - Strategy Matrix')
 
-@push('styles')
-<style>
-body {
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-        }
-
-        .matrix-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 2px;
-            background-color: #e2e8f0;
-            border: 2px solid #e2e8f0;
-            border-radius: 0.75rem;
-            overflow: hidden;
-        }
-
-        .focus-row {
-            background-color: rgba(59, 130, 246, 0.05);
-        }
-</style>
-@endpush
 
 @section('content')
 <main class="flex-1 ml-20 p-8 max-w-[1600px] mx-auto">

@@ -3,42 +3,6 @@
 
 @section('title', 'CRMTracker - Competitive Benchmarking')
 
-@push('styles')
-<style>
-body {
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-        }
-
-        .focus-column {
-            background-color: rgba(59, 130, 246, 0.1);
-        }
-
-        .radar-focus {
-            fill: rgba(59, 130, 246, 0.3);
-            stroke: #3b82f6;
-            stroke-width: 2;
-        }
-
-        .radar-avg {
-            fill: none;
-            stroke: #94a3b8;
-            stroke-width: 1.5;
-            stroke-dasharray: 4, 2;
-        }
-
-        .score-good {
-            color: #059669;
-        }
-
-        .score-mid {
-            color: #d97706;
-        }
-
-        .score-bad {
-            color: #dc2626;
-        }
-</style>
-@endpush
 
 @section('content')
 <main class="flex-1 ml-20 p-8 max-w-[1600px] mx-auto">

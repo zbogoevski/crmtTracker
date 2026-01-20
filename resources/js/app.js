@@ -1,7 +1,6 @@
 import './bootstrap';
-
-// Global CRMTracker namespace
-window.CRMT = window.CRMT || {};
+import './global';
+import './sidebar';
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
