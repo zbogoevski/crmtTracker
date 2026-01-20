@@ -1,0 +1,17 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{module}}\Infrastructure\Repositories;
+
+use App\Modules\Core\Interfaces\RepositoryInterface;
+
+/**
+ * Repository interface for {{module}} operations.
+ *
+ * Extends the base RepositoryInterface and can include module-specific methods.
+ */
+interface {{module}}RepositoryInterface extends RepositoryInterface
+{
+    // Add module-specific method signatures if needed
+}

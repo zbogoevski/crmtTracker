@@ -1,0 +1,93 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{module}}\Infrastructure\Observers;
+
+use App\Modules\{{module}}\Infrastructure\Models\{{module}};
+
+/**
+ * Observer for {{module}} model events.
+ */
+final class {{module}}Observer
+{
+    /**
+     * Handle the {{module}} "creating" event.
+     */
+    public function creating({{module}} $model): void
+    {
+        // TODO: Implement creating logic
+    }
+
+    /**
+     * Handle the {{module}} "created" event.
+     */
+    public function created({{module}} $model): void
+    {
+        // TODO: Implement created logic
+    }
+
+    /**
+     * Handle the {{module}} "updating" event.
+     */
+    public function updating({{module}} $model): void
+    {
+        // TODO: Implement updating logic
+    }
+
+    /**
+     * Handle the {{module}} "updated" event.
+     */
+    public function updated({{module}} $model): void
+    {
+        // TODO: Implement updated logic
+    }
+
+    /**
+     * Handle the {{module}} "saving" event.
+     */
+    public function saving({{module}} $model): void
+    {
+        // TODO: Implement saving logic
+    }
+
+    /**
+     * Handle the {{module}} "saved" event.
+     */
+    public function saved({{module}} $model): void
+    {
+        // TODO: Implement saved logic
+    }
+
+    /**
+     * Handle the {{module}} "deleting" event.
+     */
+    public function deleting({{module}} $model): void
+    {
+        // TODO: Implement deleting logic
+    }
+
+    /**
+     * Handle the {{module}} "deleted" event.
+     */
+    public function deleted({{module}} $model): void
+    {
+        // TODO: Implement deleted logic
+    }
+
+    /**
+     * Handle the {{module}} "restoring" event.
+     */
+    public function restoring({{module}} $model): void
+    {
+        // TODO: Implement restoring logic
+    }
+
+    /**
+     * Handle the {{module}} "restored" event.
+     */
+    public function restored({{module}} $model): void
+    {
+        // TODO: Implement restored logic
+    }
+}

@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{module}}\Application\Actions;
+
+use App\Modules\{{module}}\Infrastructure\Models\{{class}};
+use App\Modules\{{module}}\Infrastructure\Repositories\{{class}}RepositoryInterface;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
+/**
+ * Action to get all {{moduleVar}}s with pagination.
+ */
+class GetAll{{class}}Action
+{
+    /**
+     * Create a new action instance.
+     */
+    public function __construct(protected {{class}}RepositoryInterface $repository) {}
+
+    /**
+     * Execute the action to get all {{moduleVar}}s.
+     *
+     * @param int $perPage Number of items per page (default: 15)
+     * @return LengthAwarePaginator<int, {{class}}> Paginated list of {{moduleVar}}s
+     */
+    public function execute(int $perPage = 15): LengthAwarePaginator
+    {
+        /** @var LengthAwarePaginator<int, {{class}}> $result */
+        $result = $this->repository->paginate($perPage);
+
+        return $result;
+    }
+}

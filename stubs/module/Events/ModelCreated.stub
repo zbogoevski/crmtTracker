@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{module}}\Application\Events;
+
+use App\Modules\{{module}}\Infrastructure\Models\{{module}};
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+
+/**
+ * Event fired when a {{module}} is created.
+ */
+final class {{module}}Created
+{
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    /**
+     * Create a new event instance.
+     */
+    public function __construct(
+        public readonly {{module}} ${{model}}
+    ) {}
+}
+
