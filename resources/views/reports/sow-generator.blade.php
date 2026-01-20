@@ -3,48 +3,6 @@
 
 @section('title', 'CRMTracker - Proposal Generator')
 
-@push('styles')
-<style>
-body {
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-        }
-
-        .font-serif {
-            font-family: 'Merriweather', serif;
-        }
-
-        .proposal-card {
-            transition: all 0.2s ease;
-        }
-
-        .proposal-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .proposal-card.selected {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-        }
-
-        .proposal-card.focus {
-            border-color: #3b82f6;
-        }
-
-        .a4-preview {
-            background: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            padding: 32px;
-        }
-
-        .dynamic-field {
-            background-color: #fff7ed;
-            border-bottom: 2px solid #fdba74;
-            color: #c2410c;
-            padding: 0 2px;
-            font-weight: 600;
-        }
-</style>
-@endpush
 
 @section('content')
 <main class="flex-1 ml-20 p-8 max-w-[1600px] mx-auto">

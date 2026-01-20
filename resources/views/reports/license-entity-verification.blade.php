@@ -3,30 +3,6 @@
 
 @section('title', 'Report 4.1: License & Entity Verification | CRMTracker')
 
-@push('styles')
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8FAFC;
-            color: #334155;
-        }
-
-        .sticky-col {
-            position: sticky;
-            left: 0;
-            z-index: 10;
-            background: linear-gradient(to right, #f8fafc 90%, transparent);
-        }
-
-        .total-row .sticky-col {
-            background: linear-gradient(to right, #7c3aed 0%, #7c3aed 90%, transparent);
-        }
-
-        .stub-tooltip:hover::after {
-            opacity: 1;
-        }
 
         .score-good {
             color: #22c55e;

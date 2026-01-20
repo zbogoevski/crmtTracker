@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     
     <!-- Chart.js (if needed) -->
     @stack('scripts')
@@ -36,9 +36,6 @@
 
     <!-- Scripts -->
     <script>
-        // Global CRMTracker object
-        window.CRMT = window.CRMT || {};
-        
         // CSRF token for AJAX requests
         window.CSRF_TOKEN = '{{ csrf_token() }}';
         

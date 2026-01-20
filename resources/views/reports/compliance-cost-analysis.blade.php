@@ -3,31 +3,6 @@
 
 @section('title', 'Report 4.2: Risk Exposure | CRMTracker')
 
-@push('styles')
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8FAFC;
-            color: #334155;
-        }
-
-        .sticky-col {
-            position: sticky;
-            left: 0;
-            z-index: 10;
-            background: linear-gradient(to right, #f8fafc 90%, transparent);
-        }
-
-        .total-row .sticky-col {
-            background: linear-gradient(to right, #7c3aed 0%, #7c3aed 90%, transparent);
-        }
-
-        /* Receipt Zig-Zag Effect */
-        .receipt-bottom-dark {
-            background-image: linear-gradient(135deg, #0f172a 25%, transparent 25%), linear-gradient(225deg, #0f172a 25%, transparent 25%);
-            background-position: 0 0;
             background-size: 16px 16px;
             height: 8px;
             width: 100%;

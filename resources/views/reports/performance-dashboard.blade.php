@@ -271,7 +271,7 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ asset('js/vendor/chart.js') }}"></script>
     <script>
         // Server-side data
         const reportData = @json($data ?? []);
