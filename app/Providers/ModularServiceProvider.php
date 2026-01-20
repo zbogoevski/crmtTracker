@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Filesystem;
@@ -52,7 +53,7 @@ class ModularServiceProvider extends ServiceProvider
                 // For database cache, check if cache table exists
                 try {
                     \Illuminate\Support\Facades\DB::table('cache')->limit(1)->get();
-                } catch (\Exception) {
+                } catch (Exception) {
                     // Cache table doesn't exist, skip caching
                     $cacheDriver = null;
                 }
