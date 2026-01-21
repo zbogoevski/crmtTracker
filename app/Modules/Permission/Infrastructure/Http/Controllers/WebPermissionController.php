@@ -85,7 +85,7 @@ class WebPermissionController extends Controller
         $dto = CreatePermissionDTO::fromArray($request->validated());
         $this->createPermissionAction->execute($dto);
 
-        return redirect()->route('permissions.index')->with('success', 'Permission created successfully.');
+        return redirect()->route('web.permissions.index')->with('success', 'Permission created successfully.');
     }
 
     /**
@@ -116,7 +116,7 @@ class WebPermissionController extends Controller
         $dto = UpdatePermissionDTO::fromArray($request->validated());
         $this->updatePermissionAction->execute($id, $dto);
 
-        return redirect()->route('permissions.show', $id)->with('success', 'Permission updated successfully.');
+        return redirect()->route('web.permissions.show', $id)->with('success', 'Permission updated successfully.');
     }
 
     /**
@@ -130,6 +130,6 @@ class WebPermissionController extends Controller
 
         $this->deletePermissionAction->execute($id);
 
-        return redirect()->route('permissions.index')->with('success', 'Permission deleted successfully.');
+        return redirect()->route('web.permissions.index')->with('success', 'Permission deleted successfully.');
     }
 }

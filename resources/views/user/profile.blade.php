@@ -27,7 +27,7 @@
             <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-6 mb-6">
                 <h2 class="text-xl font-semibold text-slate-800 mb-4">Profile Information</h2>
                 
-                <form method="POST" action="{{ route('profile.update') }}">
+                <form method="POST" action="{{ route('web.profile.update') }}">
                     @csrf
                     @method('PUT')
 
@@ -59,7 +59,7 @@
             <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-6 mb-6">
                 <h2 class="text-xl font-semibold text-slate-800 mb-4">Change Password</h2>
                 
-                <form method="POST" action="{{ route('profile.password.update') }}">
+                <form method="POST" action="{{ route('web.profile.password.update') }}">
                     @csrf
                     @method('PUT')
 
@@ -125,7 +125,7 @@
                 @endif
 
                 @if($isTwoFactorEnabled)
-                    <form method="POST" action="{{ route('profile.2fa.disable') }}" onsubmit="return confirm('Are you sure you want to disable 2FA?');">
+                    <form method="POST" action="{{ route('web.profile.2fa.disable') }}" onsubmit="return confirm('Are you sure you want to disable 2FA?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
@@ -133,7 +133,7 @@
                         </button>
                     </form>
                 @else
-                    <form method="POST" action="{{ route('profile.2fa.setup') }}">
+                    <form method="POST" action="{{ route('web.profile.2fa.setup') }}">
                         @csrf
                         <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
                             Enable 2FA

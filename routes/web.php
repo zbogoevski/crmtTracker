@@ -12,7 +12,7 @@ Route::get('/', function () {
         return redirect('/dashboard');
     }
 
-    return redirect()->route('login');
+    return redirect()->route('web.login');
 });
 
 // Dashboard route (protected)
@@ -27,7 +27,7 @@ Route::middleware(['web', 'auth'])->group(function (): void {
             'alerts' => collect([]),
             'scores' => [],
         ]);
-    })->name('dashboard');
+    })->name('web.dashboard');
 });
 
 // Password reset route for Laravel's built-in password reset functionality

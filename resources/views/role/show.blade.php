@@ -8,10 +8,10 @@
             <div class="flex items-center justify-between mb-6">
                 <h1 class="text-3xl font-bold text-slate-800">Role Details</h1>
                 <div class="flex gap-2">
-                    <a href="{{ route('roles.edit', $role->id) }}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                    <a href="{{ route('web.roles.edit', $role->id) }}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
                         <i class="fa-solid fa-edit mr-2"></i>Edit
                     </a>
-                    <a href="{{ route('roles.index') }}" class="bg-slate-600 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
+                    <a href="{{ route('web.roles.index') }}" class="bg-slate-600 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
                         <i class="fa-solid fa-arrow-left mr-2"></i>Back
                     </a>
                 </div>
@@ -106,7 +106,7 @@
                                     <span class="text-sm font-medium text-slate-900">{{ $user->name }}</span>
                                     <span class="text-xs text-slate-500 ml-2">{{ $user->email }}</span>
                                 </div>
-                                <a href="{{ route('users.show', $user->id) }}" class="text-blue-600 hover:text-blue-900 text-sm">
+                                <a href="{{ route('web.users.show', $user->id) }}" class="text-blue-600 hover:text-blue-900 text-sm">
                                     <i class="fa-solid fa-eye"></i> View
                                 </a>
                             </div>

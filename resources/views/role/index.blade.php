@@ -7,7 +7,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center justify-between mb-6">
                 <h1 class="text-3xl font-bold text-slate-800">Roles Management</h1>
-                <a href="{{ route('roles.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                <a href="{{ route('web.roles.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                     <i class="fa-solid fa-plus mr-2"></i>Create Role
                 </a>
             </div>
@@ -49,13 +49,13 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{{ $role->created_at->format('Y-m-d') }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <a href="{{ route('roles.show', $role->id) }}" class="text-blue-600 hover:text-blue-900 mr-3">
+                                    <a href="{{ route('web.roles.show', $role->id) }}" class="text-blue-600 hover:text-blue-900 mr-3">
                                         <i class="fa-solid fa-eye"></i> View
                                     </a>
-                                    <a href="{{ route('roles.edit', $role->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">
+                                    <a href="{{ route('web.roles.edit', $role->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">
                                         <i class="fa-solid fa-edit"></i> Edit
                                     </a>
-                                    <form method="POST" action="{{ route('roles.destroy', $role->id) }}" class="inline" onsubmit="return confirm('Are you sure you want to delete this role?');">
+                                    <form method="POST" action="{{ route('web.roles.destroy', $role->id) }}" class="inline" onsubmit="return confirm('Are you sure you want to delete this role?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-600 hover:text-red-900">

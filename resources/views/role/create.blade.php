@@ -7,7 +7,7 @@
         <div class="max-w-4xl mx-auto">
             <div class="flex items-center justify-between mb-6">
                 <h1 class="text-3xl font-bold text-slate-800">Create Role</h1>
-                <a href="{{ route('roles.index') }}" class="bg-slate-600 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
+                <a href="{{ route('web.roles.index') }}" class="bg-slate-600 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
                     <i class="fa-solid fa-arrow-left mr-2"></i>Back
                 </a>
             </div>
@@ -23,7 +23,7 @@
             @endif
 
             <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
-                <form method="POST" action="{{ route('roles.store') }}">
+                <form method="POST" action="{{ route('web.roles.store') }}">
                     @csrf
 
                     <div class="mb-4">
@@ -53,7 +53,7 @@
                         <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                             Create Role
                         </button>
-                        <a href="{{ route('roles.index') }}" class="bg-slate-600 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
+                        <a href="{{ route('web.roles.index') }}" class="bg-slate-600 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
                             Cancel
                         </a>
                     </div>

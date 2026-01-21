@@ -8,10 +8,10 @@
             <div class="flex items-center justify-between mb-6">
                 <h1 class="text-3xl font-bold text-slate-800">User Details</h1>
                 <div class="flex gap-2">
-                    <a href="{{ route('users.edit', $user->id) }}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                    <a href="{{ route('web.users.edit', $user->id) }}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
                         <i class="fa-solid fa-edit mr-2"></i>Edit
                     </a>
-                    <a href="{{ route('users.index') }}" class="bg-slate-600 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
+                    <a href="{{ route('web.users.index') }}" class="bg-slate-600 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
                         <i class="fa-solid fa-arrow-left mr-2"></i>Back
                     </a>
                 </div>
@@ -82,7 +82,7 @@
             <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
                 <h2 class="text-xl font-semibold text-slate-800 mb-4">Two-Factor Authentication</h2>
                 
-                <form method="POST" action="{{ route('users.2fa.toggle', $user->id) }}" onsubmit="return confirm('Are you sure you want to {{ $isTwoFactorEnabled ? 'disable' : 'enable' }} 2FA for this user?');">
+                <form method="POST" action="{{ route('web.users.2fa.toggle', $user->id) }}" onsubmit="return confirm('Are you sure you want to {{ $isTwoFactorEnabled ? 'disable' : 'enable' }} 2FA for this user?');">
                     @csrf
                     <input type="hidden" name="action" value="{{ $isTwoFactorEnabled ? 'disable' : 'enable' }}">
                     <button type="submit" class="bg-{{ $isTwoFactorEnabled ? 'red' : 'green' }}-600 text-white px-4 py-2 rounded-lg hover:bg-{{ $isTwoFactorEnabled ? 'red' : 'green' }}-700 transition-colors">

@@ -199,15 +199,15 @@
             <span class="nav-text text-sm font-medium">A.4 Pipeline Manager</span>
         </a>
         @if(auth()->user()->hasRole('admin'))
-        <a href="{{ route('users.index') }}" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
+        <a href="{{ route('web.users.index') }}" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
             <i class="fa-solid fa-users-gear w-5 text-center"></i>
             <span class="nav-text text-sm font-medium">A.5 User Management</span>
         </a>
-        <a href="{{ route('roles.index') }}" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
+        <a href="{{ route('web.roles.index') }}" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
             <i class="fa-solid fa-user-shield w-5 text-center"></i>
             <span class="nav-text text-sm font-medium">A.6 Role Management</span>
         </a>
-        <a href="{{ route('permissions.index') }}" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
+        <a href="{{ route('web.permissions.index') }}" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
             <i class="fa-solid fa-key w-5 text-center"></i>
             <span class="nav-text text-sm font-medium">A.7 Permission Management</span>
         </a>
@@ -236,10 +236,10 @@
                 <p class="text-sm font-medium text-white truncate">{{ auth()->user()->email }}</p>
                 <p class="text-xs text-gray-500 truncate">{{ auth()->user()->roles()->first()?->name ?? 'viewer' }}</p>
             </div>
-            <a href="{{ route('profile.show') }}" class="text-gray-400 hover:text-blue-400 transition-colors" title="Profile">
+            <a href="{{ route('web.profile.show') }}" class="text-gray-400 hover:text-blue-400 transition-colors" title="Profile">
                 <i class="fa-solid fa-user"></i>
             </a>
-            <form method="POST" action="{{ route('logout') }}" class="inline">
+            <form method="POST" action="{{ route('web.logout') }}" class="inline">
                 @csrf
                 <button type="submit" class="text-gray-400 hover:text-red-400 transition-colors" title="Logout">
                     <i class="fa-solid fa-sign-out-alt"></i>

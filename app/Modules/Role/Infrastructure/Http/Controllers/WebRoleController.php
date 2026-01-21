@@ -86,7 +86,7 @@ class WebRoleController extends Controller
         $dto = CreateRoleDTO::fromArray($request->validated());
         $this->createRoleAction->execute($dto);
 
-        return redirect()->route('roles.index')->with('success', 'Role created successfully.');
+        return redirect()->route('web.roles.index')->with('success', 'Role created successfully.');
     }
 
     /**
@@ -117,7 +117,7 @@ class WebRoleController extends Controller
         $dto = UpdateRoleDTO::fromArray($request->validated());
         $this->updateRoleAction->execute($id, $dto);
 
-        return redirect()->route('roles.show', $id)->with('success', 'Role updated successfully.');
+        return redirect()->route('web.roles.show', $id)->with('success', 'Role updated successfully.');
     }
 
     /**
@@ -131,6 +131,6 @@ class WebRoleController extends Controller
 
         $this->deleteRoleAction->execute($id);
 
-        return redirect()->route('roles.index')->with('success', 'Role deleted successfully.');
+        return redirect()->route('web.roles.index')->with('success', 'Role deleted successfully.');
     }
 }

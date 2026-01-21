@@ -6,7 +6,7 @@ use App\Modules\Permission\Infrastructure\Http\Controllers\WebPermissionControll
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['web', 'auth'])->group(function (): void {
-    Route::prefix('permissions')->name('permissions.')->group(function (): void {
+    Route::prefix('permissions')->name('web.permissions.')->group(function (): void {
         Route::get('/', [WebPermissionController::class, 'index'])->name('index');
         Route::get('/create', [WebPermissionController::class, 'create'])->name('create');
         Route::post('/', [WebPermissionController::class, 'store'])->name('store');

@@ -69,7 +69,7 @@ class WebUserController extends Controller
         $dto = UpdateUserDTO::fromArray($request->validated());
         $this->updateUserAction->execute($user->id, $dto);
 
-        return redirect()->route('profile.show')->with('success', 'Profile updated successfully.');
+        return redirect()->route('web.profile.show')->with('success', 'Profile updated successfully.');
     }
 
     /**
@@ -90,7 +90,7 @@ class WebUserController extends Controller
             'password' => $request->password,
         ]));
 
-        return redirect()->route('profile.show')->with('success', 'Password updated successfully.');
+        return redirect()->route('web.profile.show')->with('success', 'Password updated successfully.');
     }
 
     /**
@@ -106,7 +106,7 @@ class WebUserController extends Controller
         try {
             $setup = $this->setupTwoFactorAction->execute($user);
 
-            return redirect()->route('profile.show')
+            return redirect()->route('web.profile.show')
                 ->with('twoFactorSetup', $setup)
                 ->with('success', '2FA setup initiated. Please scan the QR code and verify.');
         } catch (Exception $e) {
@@ -127,7 +127,7 @@ class WebUserController extends Controller
         try {
             $this->disableTwoFactorAction->execute($user);
 
-            return redirect()->route('profile.show')->with('success', '2FA disabled successfully.');
+            return redirect()->route('web.profile.show')->with('success', '2FA disabled successfully.');
         } catch (Exception $e) {
             return back()->withErrors(['twoFactor' => $e->getMessage()]);
         }
@@ -192,7 +192,7 @@ class WebUserController extends Controller
         $dto = CreateUserDTO::fromArray($request->validated());
         $this->createUserAction->execute($dto);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('web.users.index')->with('success', 'User created successfully.');
     }
 
     /**
@@ -225,7 +225,7 @@ class WebUserController extends Controller
         $dto = UpdateUserDTO::fromArray($request->validated());
         $this->updateUserAction->execute($id, $dto);
 
-        return redirect()->route('users.show', $id)->with('success', 'User updated successfully.');
+        return redirect()->route('web.users.show', $id)->with('success', 'User updated successfully.');
     }
 
     /**
@@ -239,7 +239,7 @@ class WebUserController extends Controller
 
         $this->deleteUserAction->execute($id);
 
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('web.users.index')->with('success', 'User deleted successfully.');
     }
 
     /**
@@ -263,7 +263,7 @@ class WebUserController extends Controller
                 $message = '2FA disabled for user.';
             }
 
-            return redirect()->route('users.show', $id)->with('success', $message);
+            return redirect()->route('web.users.show', $id)->with('success', $message);
         } catch (Exception $e) {
             return back()->withErrors(['twoFactor' => $e->getMessage()]);
         }
