@@ -37,7 +37,7 @@ class WebPermissionController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $perPage = (int) $request->get('per_page', 15);
+        $perPage = (int) $request->get('per_page', 20);
         $permissions = $this->getAllPermissionsAction->execute($perPage);
 
         return view('permission.index', [
