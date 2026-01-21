@@ -61,6 +61,10 @@ class PermissionController extends Controller
      */
     public function index(): JsonResponse
     {
+        if (! auth()->user()?->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $permissions = $this->getAllPermissionsAction->execute();
 
         return ApiResponse::paginated($permissions, 'Permissions retrieved successfully', PermissionResource::collection($permissions->items()));
@@ -110,6 +114,10 @@ class PermissionController extends Controller
      */
     public function show(int $id): JsonResponse
     {
+        if (! auth()->user()?->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         return ApiResponse::success(new PermissionResource($this->getPermissionByIdAction->execute($id)), 'Permission retrieved successfully');
     }
 
@@ -159,6 +167,10 @@ class PermissionController extends Controller
      */
     public function store(CreatePermissionRequest $request): JsonResponse
     {
+        if (! auth()->user()?->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         return ApiResponse::created(new PermissionResource($this->createPermissionAction->execute(CreatePermissionDTO::fromArray($request->validated()))), 'Permission created successfully');
     }
 
@@ -223,6 +235,10 @@ class PermissionController extends Controller
      */
     public function update(int $id, UpdatePermissionRequest $request): JsonResponse
     {
+        if (! auth()->user()?->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         return ApiResponse::success(new PermissionResource($this->updatePermissionAction->execute($id, UpdatePermissionDTO::fromArray($request->validated()))), 'Permission updated successfully');
     }
 
@@ -270,6 +286,10 @@ class PermissionController extends Controller
      */
     public function destroy(int $id): JsonResponse
     {
+        if (! auth()->user()?->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $this->deletePermissionAction->execute($id);
 
         return ApiResponse::success(null, 'Permission deleted successfully');

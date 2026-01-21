@@ -61,6 +61,10 @@ class RoleController extends Controller
      */
     public function index(): JsonResponse
     {
+        if (! auth()->user()?->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $roles = $this->getAllRolesAction->execute();
 
         return ApiResponse::paginated($roles, 'Roles retrieved successfully', RoleResource::collection($roles->items()));
@@ -110,6 +114,10 @@ class RoleController extends Controller
      */
     public function show(int $id): JsonResponse
     {
+        if (! auth()->user()?->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         return ApiResponse::success(new RoleResource($this->getRoleByIdAction->execute($id)), 'Role retrieved successfully');
     }
 
@@ -159,6 +167,10 @@ class RoleController extends Controller
      */
     public function store(CreateRoleRequest $request): JsonResponse
     {
+        if (! auth()->user()?->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         return ApiResponse::created(new RoleResource($this->createRoleAction->execute(CreateRoleDTO::fromArray($request->validated()))), 'Role created successfully');
     }
 
@@ -223,6 +235,10 @@ class RoleController extends Controller
      */
     public function update(int $id, UpdateRoleRequest $request): JsonResponse
     {
+        if (! auth()->user()?->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         return ApiResponse::success(new RoleResource($this->updateRoleAction->execute($id, UpdateRoleDTO::fromArray($request->validated()))), 'Role updated successfully');
     }
 
@@ -270,6 +286,10 @@ class RoleController extends Controller
      */
     public function destroy(int $id): JsonResponse
     {
+        if (! auth()->user()?->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $this->deleteRoleAction->execute($id);
 
         return ApiResponse::success(null, 'Role deleted successfully');

@@ -7,9 +7,11 @@
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center justify-between mb-6">
                 <h1 class="text-3xl font-bold text-slate-800">Permissions Management</h1>
-                <a href="{{ route('web.permissions.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                    <i class="fa-solid fa-plus mr-2"></i>Create Permission
-                </a>
+                @if(auth()->user()->hasRole('admin'))
+                    <a href="{{ route('web.permissions.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fa-solid fa-plus mr-2"></i>Create Permission
+                    </a>
+                @endif
             </div>
 
             @if(session('success'))
@@ -52,16 +54,18 @@
                                     <a href="{{ route('web.permissions.show', $permission->id) }}" class="text-blue-600 hover:text-blue-900 mr-3">
                                         <i class="fa-solid fa-eye"></i> View
                                     </a>
-                                    <a href="{{ route('web.permissions.edit', $permission->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">
-                                        <i class="fa-solid fa-edit"></i> Edit
-                                    </a>
-                                    <form method="POST" action="{{ route('web.permissions.destroy', $permission->id) }}" class="inline" onsubmit="return confirm('Are you sure you want to delete this permission?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-900">
-                                            <i class="fa-solid fa-trash"></i> Delete
-                                        </button>
-                                    </form>
+                                    @if(auth()->user()->hasRole('admin'))
+                                        <a href="{{ route('web.permissions.edit', $permission->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">
+                                            <i class="fa-solid fa-edit"></i> Edit
+                                        </a>
+                                        <form method="POST" action="{{ route('web.permissions.destroy', $permission->id) }}" class="inline" onsubmit="return confirm('Are you sure you want to delete this permission?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-900">
+                                                <i class="fa-solid fa-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @empty

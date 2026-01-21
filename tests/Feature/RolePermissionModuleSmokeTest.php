@@ -18,7 +18,7 @@ class RolePermissionModuleSmokeTest extends TestCase
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $this->getJson('/api/v1/permissions')->assertStatus(200);
-        $this->getJson('/api/v1/roles')->assertStatus(200);
+        $this->getJson('/api/v1/permissions')->assertStatus(403);
+        $this->getJson('/api/v1/roles')->assertStatus(403);
     }
 }

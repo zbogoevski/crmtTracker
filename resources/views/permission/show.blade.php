@@ -8,9 +8,11 @@
             <div class="flex items-center justify-between mb-6">
                 <h1 class="text-3xl font-bold text-slate-800">Permission Details</h1>
                 <div class="flex gap-2">
-                    <a href="{{ route('web.permissions.edit', $permission->id) }}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
-                        <i class="fa-solid fa-edit mr-2"></i>Edit
-                    </a>
+                    @if(auth()->user()->hasRole('admin'))
+                        <a href="{{ route('web.permissions.edit', $permission->id) }}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                            <i class="fa-solid fa-edit mr-2"></i>Edit
+                        </a>
+                    @endif
                     <a href="{{ route('web.permissions.index') }}" class="bg-slate-600 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
                         <i class="fa-solid fa-arrow-left mr-2"></i>Back
                     </a>

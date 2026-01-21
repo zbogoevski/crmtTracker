@@ -7,6 +7,7 @@ namespace App\Modules\User\Infrastructure\Traits;
 use App\Modules\Permission\Infrastructure\Models\Permission;
 use App\Modules\Role\Infrastructure\Models\Role;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Str;
 
 trait HasRoles
 {
@@ -48,7 +49,7 @@ trait HasRoles
     public function assignRole(Role|string $role): void
     {
         if (is_string($role)) {
-            $role = Role::where('name', $role)->where('guard_name', 'api')->firstOrFail();
+            $role = Role::where('name', $role)->where('guard_name', $this->currentGuardName())->firstOrFail();
         }
 
         $this->roles()->syncWithoutDetaching([$role->id]);
@@ -60,7 +61,7 @@ trait HasRoles
     public function removeRole(Role|string $role): void
     {
         if (is_string($role)) {
-            $role = Role::where('name', $role)->where('guard_name', 'api')->firstOrFail();
+            $role = Role::where('name', $role)->where('guard_name', $this->currentGuardName())->firstOrFail();
         }
 
         $this->roles()->detach($role->id);
@@ -72,7 +73,7 @@ trait HasRoles
     public function givePermissionTo(Permission|string $permission): void
     {
         if (is_string($permission)) {
-            $permission = Permission::where('name', $permission)->where('guard_name', 'api')->firstOrFail();
+            $permission = Permission::where('name', $permission)->where('guard_name', $this->currentGuardName())->firstOrFail();
         }
 
         $this->permissions()->syncWithoutDetaching([$permission->id]);
@@ -84,7 +85,7 @@ trait HasRoles
     public function revokePermissionTo(Permission|string $permission): void
     {
         if (is_string($permission)) {
-            $permission = Permission::where('name', $permission)->where('guard_name', 'api')->firstOrFail();
+            $permission = Permission::where('name', $permission)->where('guard_name', $this->currentGuardName())->firstOrFail();
         }
 
         $this->permissions()->detach($permission->id);
@@ -96,7 +97,7 @@ trait HasRoles
     public function hasRole(Role|string $role): bool
     {
         if (is_string($role)) {
-            return $this->roles()->where('name', $role)->where('guard_name', 'api')->exists();
+            return $this->roles()->where('name', $role)->where('guard_name', $this->currentGuardName())->exists();
         }
 
         return $this->roles()->where('roles.id', $role->id)->exists();
@@ -107,9 +108,11 @@ trait HasRoles
      */
     public function hasPermissionTo(Permission|string $permission): bool
     {
+        $guardName = $this->currentGuardName();
+
         // Check direct permissions
         if (is_string($permission)) {
-            $hasDirectPermission = $this->permissions()->where('name', $permission)->where('guard_name', 'api')->exists();
+            $hasDirectPermission = $this->permissions()->where('name', $permission)->where('guard_name', $guardName)->exists();
         } else {
             $hasDirectPermission = $this->permissions()->where('permissions.id', $permission->id)->exists();
         }
@@ -122,7 +125,7 @@ trait HasRoles
         $rolePermissions = $this->roles()->with('permissions')->get()->pluck('permissions')->flatten();
 
         if (is_string($permission)) {
-            return $rolePermissions->where('name', $permission)->where('guard_name', 'api')->isNotEmpty();
+            return $rolePermissions->where('name', $permission)->where('guard_name', $guardName)->isNotEmpty();
         }
 
         return $rolePermissions->where('id', $permission->id)->isNotEmpty();
@@ -162,5 +165,14 @@ trait HasRoles
         }
 
         return true;
+    }
+
+    protected function currentGuardName(): string
+    {
+        // Use request path to distinguish API vs web. Sanctum requests always hit /api/*.
+        // In CLI contexts there is no API path, so default to web.
+        $path = request()->path();
+
+        return Str::startsWith($path, 'api/') ? 'api' : 'web';
     }
 }

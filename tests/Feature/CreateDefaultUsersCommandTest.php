@@ -25,10 +25,17 @@ class CreateDefaultUsersCommandTest extends TestCase
         $client = User::where('email', 'client@crmtracker.com')->firstOrFail();
 
         $adminRole = Role::where('name', 'admin')->where('guard_name', 'api')->firstOrFail();
-        $clientRole = Role::where('name', 'client')->where('guard_name', 'api')->firstOrFail();
+        $clientRole = Role::where('name', 'client')->where('guard_name', 'web')->firstOrFail();
 
         $this->assertDatabaseHas('model_has_roles', [
             'role_id' => $adminRole->id,
+            'model_type' => User::class,
+            'model_id' => $admin->id,
+        ]);
+
+        $adminWebRole = Role::where('name', 'admin')->where('guard_name', 'web')->firstOrFail();
+        $this->assertDatabaseHas('model_has_roles', [
+            'role_id' => $adminWebRole->id,
             'model_type' => User::class,
             'model_id' => $admin->id,
         ]);

@@ -16,9 +16,9 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $adminRole = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'api']);
-
-        $clientRole = Role::firstOrCreate(['name' => 'client', 'guard_name' => 'api']);
+        $adminApiRole = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'api']);
+        $adminWebRole = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+        $clientWebRole = Role::firstOrCreate(['name' => 'client', 'guard_name' => 'web']);
 
         $adminUser = User::firstOrCreate(
             ['email' => 'admin@crmtracker.com'],
@@ -29,8 +29,11 @@ class UserSeeder extends Seeder
             ]
         );
 
-        if (! $adminUser->hasRole('admin')) {
-            $adminUser->assignRole($adminRole);
+        if (! $adminUser->roles()->where('name', 'admin')->where('guard_name', 'api')->exists()) {
+            $adminUser->assignRole($adminApiRole);
+        }
+        if (! $adminUser->roles()->where('name', 'admin')->where('guard_name', 'web')->exists()) {
+            $adminUser->assignRole($adminWebRole);
         }
 
         $clientUser = User::firstOrCreate(
@@ -42,8 +45,8 @@ class UserSeeder extends Seeder
             ]
         );
 
-        if (! $clientUser->hasRole('client')) {
-            $clientUser->assignRole($clientRole);
+        if (! $clientUser->roles()->where('name', 'client')->where('guard_name', 'web')->exists()) {
+            $clientUser->assignRole($clientWebRole);
         }
 
         if ($this->command) {

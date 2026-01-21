@@ -28,8 +28,9 @@ class CreateDefaultUsersCommand extends Command
         $clientPassword = (string) ($this->option('client-password') ?: 'Client123!@#');
         $force = (bool) $this->option('force');
 
-        $adminRole = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'api']);
-        $clientRole = Role::firstOrCreate(['name' => 'client', 'guard_name' => 'api']);
+        $adminApiRole = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'api']);
+        $adminWebRole = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+        $clientWebRole = Role::firstOrCreate(['name' => 'client', 'guard_name' => 'web']);
 
         $adminUser = $this->createOrUpdateUser(
             email: $adminEmail,
@@ -38,8 +39,11 @@ class CreateDefaultUsersCommand extends Command
             force: $force,
         );
 
-        if (! $adminUser->hasRole('admin')) {
-            $adminUser->assignRole($adminRole);
+        if (! $adminUser->roles()->where('name', 'admin')->where('guard_name', 'api')->exists()) {
+            $adminUser->assignRole($adminApiRole);
+        }
+        if (! $adminUser->roles()->where('name', 'admin')->where('guard_name', 'web')->exists()) {
+            $adminUser->assignRole($adminWebRole);
         }
 
         $clientUser = $this->createOrUpdateUser(
@@ -49,8 +53,8 @@ class CreateDefaultUsersCommand extends Command
             force: $force,
         );
 
-        if (! $clientUser->hasRole('client')) {
-            $clientUser->assignRole($clientRole);
+        if (! $clientUser->roles()->where('name', 'client')->where('guard_name', 'web')->exists()) {
+            $clientUser->assignRole($clientWebRole);
         }
 
         $this->info('Default users are ready.');

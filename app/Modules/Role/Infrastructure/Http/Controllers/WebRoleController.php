@@ -34,7 +34,7 @@ class WebRoleController extends Controller
      */
     public function index(Request $request): View
     {
-        if (! auth()->user()?->hasRole('admin')) {
+        if (! auth()->user()?->hasAnyRole(['admin', 'client'])) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -51,7 +51,7 @@ class WebRoleController extends Controller
      */
     public function show(int $id): View
     {
-        if (! auth()->user()?->hasRole('admin')) {
+        if (! auth()->user()?->hasAnyRole(['admin', 'client'])) {
             abort(403, 'Unauthorized action.');
         }
 
