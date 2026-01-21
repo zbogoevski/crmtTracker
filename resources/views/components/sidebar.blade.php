@@ -207,18 +207,22 @@
             <i class="fa-solid fa-user-shield w-5 text-center"></i>
             <span class="nav-text text-sm font-medium">A.6 Role Management</span>
         </a>
+        <a href="{{ route('permissions.index') }}" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
+            <i class="fa-solid fa-key w-5 text-center"></i>
+            <span class="nav-text text-sm font-medium">A.7 Permission Management</span>
+        </a>
         @endif
         <a href="#" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
             <i class="fa-solid fa-credit-card w-5 text-center"></i>
-            <span class="nav-text text-sm font-medium">A.6 Product Intelligence</span>
+            <span class="nav-text text-sm font-medium">A.8 Product Intelligence</span>
         </a>
         <a href="#" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
             <i class="fa-solid fa-calendar-check w-5 text-center"></i>
-            <span class="nav-text text-sm font-medium">A.7 Tracking Manager</span>
+            <span class="nav-text text-sm font-medium">A.9 Tracking Manager</span>
         </a>
         <a href="#" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
             <i class="fa-solid fa-book-open w-5 text-center"></i>
-            <span class="nav-text text-sm font-medium">A.8 Documentation Hub</span>
+            <span class="nav-text text-sm font-medium">A.10 Documentation Hub</span>
         </a>
     </nav>
 
