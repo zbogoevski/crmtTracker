@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Core;
 
+use App\Modules\Role\Infrastructure\Models\Role;
 use App\Modules\User\Infrastructure\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
@@ -21,6 +22,7 @@ class ApiResponseIntegrationTest extends TestCase
     {
         parent::setUp();
         $this->user = User::factory()->create();
+        $this->user->assignRole(Role::factory()->create(['name' => 'admin', 'guard_name' => 'api']));
         Sanctum::actingAs($this->user);
     }
 

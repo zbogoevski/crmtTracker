@@ -11,6 +11,7 @@ use App\Modules\Core\Exceptions\NotFoundException;
 use App\Modules\Core\Exceptions\UnauthorizedException;
 use App\Modules\Core\Exceptions\UpdateException;
 use App\Modules\Core\Exceptions\ValidationException;
+use App\Modules\Role\Infrastructure\Models\Role;
 use App\Modules\User\Infrastructure\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
@@ -28,6 +29,7 @@ class ExceptionHandlingTest extends TestCase
     {
         parent::setUp();
         $this->user = User::factory()->create();
+        $this->user->assignRole(Role::factory()->create(['name' => 'admin', 'guard_name' => 'api']));
         Sanctum::actingAs($this->user);
     }
 

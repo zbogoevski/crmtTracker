@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Performance;
 
+use App\Modules\Role\Infrastructure\Models\Role;
 use App\Modules\User\Infrastructure\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
@@ -48,6 +49,7 @@ class ApiPerformanceTest extends TestCase
     {
         // Create test data
         $user = User::factory()->create();
+        $user->assignRole(Role::factory()->create(['name' => 'admin', 'guard_name' => 'api']));
         Sanctum::actingAs($user);
 
         // Test users list performance
@@ -80,6 +82,7 @@ class ApiPerformanceTest extends TestCase
     {
         // Create test data
         $user = User::factory()->create();
+        $user->assignRole(Role::factory()->create(['name' => 'admin', 'guard_name' => 'api']));
         Sanctum::actingAs($user);
 
         // Test roles list performance
@@ -109,6 +112,7 @@ class ApiPerformanceTest extends TestCase
     {
         // Create test data
         $user = User::factory()->create();
+        $user->assignRole(Role::factory()->create(['name' => 'admin', 'guard_name' => 'api']));
         Sanctum::actingAs($user);
 
         $startTime = microtime(true);
@@ -145,6 +149,9 @@ class ApiPerformanceTest extends TestCase
 
         // Test that we can still perform operations efficiently
         $user = User::first();
+        if ($user) {
+            $user->assignRole(Role::factory()->create(['name' => 'admin', 'guard_name' => 'api']));
+        }
         Sanctum::actingAs($user);
 
         $startTime = microtime(true);
