@@ -48,13 +48,18 @@ class RoleModuleServiceProvider extends ServiceProvider
 
     protected function loadRoutes(): void
     {
-        $routeFile = __DIR__.'/../Routes/roles.php';
-
-        if (! file_exists($routeFile)) {
-            return;
+        // Load API routes
+        $apiRouteFile = __DIR__.'/../Routes/roles.php';
+        if (file_exists($apiRouteFile)) {
+            require $apiRouteFile;
         }
 
-        // Routes already have prefix and middleware in route files, just require them
-        require $routeFile;
+        // Load web routes
+        $webRouteFile = __DIR__.'/../Routes/web.php';
+        if (file_exists($webRouteFile)) {
+            Route::middleware('web')->group(function () use ($webRouteFile): void {
+                require $webRouteFile;
+            });
+        }
     }
 }
