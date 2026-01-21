@@ -20,6 +20,8 @@ class RoleModuleCrudTest extends TestCase
     {
         parent::setUp();
         $user = User::factory()->create();
+        $adminRole = Role::factory()->create(['name' => 'admin', 'guard_name' => 'api']);
+        $user->assignRole($adminRole);
         Sanctum::actingAs($user);
     }
 

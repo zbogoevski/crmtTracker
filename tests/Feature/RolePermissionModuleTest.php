@@ -21,16 +21,19 @@ class RolePermissionModuleTest extends TestCase
     {
         parent::setUp();
         $user = User::factory()->create();
+        $adminRole = Role::factory()->create(['name' => 'admin', 'guard_name' => 'api']);
+        $user->assignRole($adminRole);
         Sanctum::actingAs($user);
     }
 
     public function test_role_can_be_created()
     {
+        $roleName = 'test-role-'.uniqid();
         $response = $this->postJson('/api/v1/roles', [
-            'name' => 'admin',
+            'name' => $roleName,
         ]);
         $response->assertStatus(201);
-        $this->assertDatabaseHas('roles', ['name' => 'admin']);
+        $this->assertDatabaseHas('roles', ['name' => $roleName]);
     }
 
     public function test_permission_can_be_created()

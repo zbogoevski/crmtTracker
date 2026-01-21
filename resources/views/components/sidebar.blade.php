@@ -203,6 +203,10 @@
             <i class="fa-solid fa-users-gear w-5 text-center"></i>
             <span class="nav-text text-sm font-medium">A.5 User Management</span>
         </a>
+        <a href="{{ route('roles.index') }}" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
+            <i class="fa-solid fa-user-shield w-5 text-center"></i>
+            <span class="nav-text text-sm font-medium">A.6 Role Management</span>
+        </a>
         @endif
         <a href="#" class="nav-item flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
             <i class="fa-solid fa-credit-card w-5 text-center"></i>
